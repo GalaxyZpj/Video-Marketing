@@ -1,0 +1,1 @@
+web: gunicorn video_marketing.wsgi --log-file -

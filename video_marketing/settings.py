@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v&)7#uud5%xg=h0rm(^)2@9kct@hx$fpf+b)kv0j6--m(6uhw('
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -134,7 +134,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_URL = 'login'
-from django.http import HttpRequest
-# LOGIN_REDIRECT_URL = 'dashboard'
-# LOGIN_REDIRECT_URL = HttpRequest
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
