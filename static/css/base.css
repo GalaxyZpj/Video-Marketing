@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400;500;600;700;800&display=swap");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Baloo Thambi 2', cursive;
+  font-size: large;
+}
+
+html {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+body {
+  height: 100vh !important;
+  width: 100vw !important;
+  margin: 0;
+  background: url(/static/images/background.jpg) no-repeat;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(8px) !important;
+          backdrop-filter: blur(8px) !important;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.navbar-custom-bg-dark {
+  background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#0000));
+  background: linear-gradient(#000, #0000);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.navbar-collapse {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav-link {
+  color: white;
+  margin: 4px 0 0 1rem;
+  padding: 0;
+  display: inline-block;
+}
+
+.nav-link--signup {
+  margin-top: 0;
+  padding: 2px 0 2px 0;
+  border: 2px solid white;
+  border-radius: 8px;
+  background: var(--purple, purple);
+  font-weight: bold;
+}
+
+.nav-link--signup :hover {
+  color: black;
+  background: white;
+}
+
+.navbar-toggler-icon {
+  color: white;
+}
+/*# sourceMappingURL=base.css.map */

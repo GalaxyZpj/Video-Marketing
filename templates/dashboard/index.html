@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="dashboard-body">
+        <div class="dashboard-sidebar">
+            <!-- <a href=""><img src="{% static 'images/dashboard/sidebar/home.svg' %}" alt="Home"></a>
+            <a href=""><img src="{% static 'images/dashboard/sidebar/about.svg' %}" alt="About"></a>
+            <a href=""><img src="{% static 'images/dashboard/sidebar/login.png' %}" alt="Login"></a>
+            <a href=""><img src="{% static 'images/dashboard/sidebar/signup.png' %}" alt="Signup"></a> -->
+            <a class="sidebar-back" href="{% url 'home' %}">BACK</a>
+            <div class="sidebar-seperator"></div>
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="">ABOUT</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}">{{ user|upper }}</a>
+            <a href="{% url 'logout' %}">LOGOUT</a>
+            {% else %}
+            <a href="{% url 'login' %}">LOGIN</a>
+            <a href="">SIGNUP</a>
+            {% endif %}
+        </div>
+        <div class="dashboard-main">
+            <div class="dashboard--toolbar">
+                <form class="dashboard--toolbar-search-form" action="">
+                    <input class="search-bar" type="text" name="search" placeholder="Search">
+                    <span class=search-submit><button type="submit"><i class="fa fa-search"></i></button></span>
+                </form>
+                <a class="dashboard--toolbar-add-post" href="">Add Post</a>
+            </div>
+            <div class="dashboard--no-posts">
+                <p>No posts found</p>
+            </div>
+            <!-- <div class="dashboard--posts">
+                <div class="dashboard--post-container">
+
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+                    
+                </div>
+                <div class="dashboard--post-container">
+
+                </div>
+            </div> -->
+        </div>
+    </div>    
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
+</html>

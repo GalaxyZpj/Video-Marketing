@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: large;
+}
+
+html {
+    height: 100vh !important;
+    width: 100vw !important;
+}
+
+body {
+    height: 100vh !important;
+    width: 100vw !important;
+    margin: 0;
+    background: url(/static/images/background.jpg) no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(8px) !important;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.navbar-custom-bg-dark {
+    background: linear-gradient(#000, #0000);
+    justify-content: space-between;
+
+}
+
+.navbar-collapse {
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    margin: 4px 0 0 1rem;
+    padding: 0;
+    display: inline-block;
+
+}
+
+.nav-link--signup {
+    margin-top: 0;
+    padding: 2px 0 2px 0;
+    border: 2px solid white;
+    border-radius: 8px;
+    background: var(--purple, purple);
+    font-weight: bold;
+
+    :hover {
+        color: black;
+        background: white;
+    }
+}
+
+.navbar-toggler-icon { 
+    color: white;
+}
