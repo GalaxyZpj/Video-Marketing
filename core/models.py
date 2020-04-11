@@ -44,6 +44,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False)
     title = models.CharField("Post Title", max_length=128, blank=False)
     description = models.TextField("Post Description", max_length=1024, blank=True)
+    thumbnail = models.URLField("Thumbnail", blank=False)
     video = EmbedVideoField("Video")
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

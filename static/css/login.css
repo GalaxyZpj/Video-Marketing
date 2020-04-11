@@ -32,6 +32,10 @@
   font-size: xxx-large;
 }
 
+.login-form--error {
+  color: red;
+}
+
 .login-form input,
 .login-form input:focus {
   margin: 1.5rem auto;

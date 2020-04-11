@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'embed_video',
+    'sorl.thumbnail',
     'core',
     'dashboard',
 ]
@@ -134,7 +135,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_URL = 'login'
-from django.http import HttpRequest
-# LOGIN_REDIRECT_URL = 'dashboard'
-# LOGIN_REDIRECT_URL = HttpRequest
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
