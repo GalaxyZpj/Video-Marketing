@@ -1,4 +1,6 @@
 {% load static %}
+{% load cache %}
+{% load thumbnail %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,11 +14,11 @@
 </head>
 <body>
     <div class="dashboard-body">
+        <div class="backdrop" id="add-post-backdrop">
+            
+        </div>
+
         <div class="dashboard-sidebar">
-            <!-- <a href=""><img src="{% static 'images/dashboard/sidebar/home.svg' %}" alt="Home"></a>
-            <a href=""><img src="{% static 'images/dashboard/sidebar/about.svg' %}" alt="About"></a>
-            <a href=""><img src="{% static 'images/dashboard/sidebar/login.png' %}" alt="Login"></a>
-            <a href=""><img src="{% static 'images/dashboard/sidebar/signup.png' %}" alt="Signup"></a> -->
             <a class="sidebar-back" href="{% url 'home' %}">BACK</a>
             <div class="sidebar-seperator"></div>
             <a href="{% url 'home' %}">HOME</a>
@@ -35,55 +37,36 @@
                     <input class="search-bar" type="text" name="search" placeholder="Search">
                     <span class=search-submit><button type="submit"><i class="fa fa-search"></i></button></span>
                 </form>
-                <a class="dashboard--toolbar-add-post" href="">Add Post</a>
+                {% if user.is_authenticated %}
+                <a class="dashboard--toolbar-add-post">Add Post</a>
+                {% endif %}
             </div>
+            {% if posts %}
+
+            <div class="dashboard--posts">
+                {% for post in posts %}
+                <div class="dashboard--post-container" post_id="{{ post.pk }}">
+
+                    <a style="background-image: url('{{ post.thumbnail }}');">
+                        <img src="{% static 'images/dashboard/play.png' %}" alt="">
+                        <p>{{ post.title|truncatechars:50 }}</p>
+                    </a>
+
+                </div>
+                {% endfor %}
+            </div>
+
+            {% else %}
             <div class="dashboard--no-posts">
                 <p>No posts found</p>
             </div>
-            <!-- <div class="dashboard--posts">
-                <div class="dashboard--post-container">
+            {% endif %}
 
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-                    
-                </div>
-                <div class="dashboard--post-container">
-
-                </div>
-            </div> -->
         </div>
     </div>    
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/jquery.js' %}"></script>
 </html>

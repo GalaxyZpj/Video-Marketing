@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'embed_video',
+    'sorl.thumbnail',
     'core',
-    'dashboard',
+    'video_dashboard',
 ]
 
 MIDDLEWARE = [
