@@ -6,10 +6,8 @@
     font-family: 'Baloo Thambi 2', cursive;
 }
 
-.video-backdrop {
+.backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
     height: 100vh;
     width: 100vw;
     z-index: 2;
@@ -18,6 +16,41 @@
     visibility: hidden;
     justify-content: center;
     align-items: center;
+}
+
+.add-post-form-div {
+    padding: 32px;
+    background-color: white;
+    width: 50vw;
+    height: 60vh;
+    border-radius: 8px;
+
+    input,
+    select,
+    textarea {
+        height: 2.5rem;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+
+    .add-post-form--title {
+        text-align: center;
+        margin: 0 0 16px 0;
+    }
+    
+    .post-form-group {
+        padding: 8px;
+        display: grid;
+    }
+    
+    .add-post-form--submit {
+        background-color: black;
+        color: white;
+        border: 2px solid blank;
+        border-radius: 8px;
+        height: 2.7rem;
+        width: 4.5rem;
+    }
 }
 
 .video-player {
@@ -35,56 +68,6 @@
 iframe {
     height: 100%;
     width: 100%;
-}
-
-.backdrop {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    z-index: 2;
-    background: #0000008a;
-    display: flex;
-    visibility: hidden;
-    justify-content: center;
-    align-items: center;
-
-    .add-post-form-div {
-        padding: 32px;
-        background-color: white;
-        width: 50vw;
-        height: 60vh;
-        border-radius: 8px;
-        input,
-        select,
-        textarea {
-            height: 2.5rem;
-            border: 2px solid black;
-            border-radius: 5px;
-        }
-    }
-
-    .add-post-form--title {
-        text-align: center;
-        margin: 0 0 16px 0;
-    }
-
-    // .add-post-form {
-        
-    // }
-
-    .post-form-group {
-        padding: 8px;
-        display: grid;
-    }
-
-    .add-post-form--submit {
-        background-color: black;
-        color: white;
-        border: 2px solid blank;
-        border-radius: 8px;
-        height: 2.7rem;
-        width: 4.5rem;
-    }
 }
 
 .dashboard-body {

@@ -6,10 +6,8 @@
   font-family: 'Baloo Thambi 2', cursive;
 }
 
-.video-backdrop {
+.backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
   height: 100vh;
   width: 100vw;
   z-index: 2;
@@ -24,6 +22,42 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.add-post-form-div {
+  padding: 32px;
+  background-color: white;
+  width: 50vw;
+  height: 60vh;
+  border-radius: 8px;
+}
+
+.add-post-form-div input,
+.add-post-form-div select,
+.add-post-form-div textarea {
+  height: 2.5rem;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.add-post-form-div .add-post-form--title {
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
+.add-post-form-div .post-form-group {
+  padding: 8px;
+  display: -ms-grid;
+  display: grid;
+}
+
+.add-post-form-div .add-post-form--submit {
+  background-color: black;
+  color: white;
+  border: 2px solid blank;
+  border-radius: 8px;
+  height: 2.7rem;
+  width: 4.5rem;
 }
 
 .video-player {
@@ -46,60 +80,6 @@
 iframe {
   height: 100%;
   width: 100%;
-}
-
-.backdrop {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  z-index: 2;
-  background: #0000008a;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  visibility: hidden;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.backdrop .add-post-form-div {
-  padding: 32px;
-  background-color: white;
-  width: 50vw;
-  height: 60vh;
-  border-radius: 8px;
-}
-
-.backdrop .add-post-form-div input,
-.backdrop .add-post-form-div select,
-.backdrop .add-post-form-div textarea {
-  height: 2.5rem;
-  border: 2px solid black;
-  border-radius: 5px;
-}
-
-.backdrop .add-post-form--title {
-  text-align: center;
-  margin: 0 0 16px 0;
-}
-
-.backdrop .post-form-group {
-  padding: 8px;
-  display: -ms-grid;
-  display: grid;
-}
-
-.backdrop .add-post-form--submit {
-  background-color: black;
-  color: white;
-  border: 2px solid blank;
-  border-radius: 8px;
-  height: 2.7rem;
-  width: 4.5rem;
 }
 
 .dashboard-body {

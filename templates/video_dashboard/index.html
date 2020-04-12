@@ -15,37 +15,7 @@
 <body>
     <div class="dashboard-body">
         <div class="backdrop" id="add-post-backdrop">
-            <div class="add-post-form-div">
-                <h1 class="add-post-form--title">Add Post</h1>
-                    <form class="add-post-form" action="" method="POST">
-                    {% csrf_token %}
-
-                    <div class="post-form-group">
-                        <label for="category">Category</label>
-                        <select name="category">
-                            {% for category in categories %}
-                            <option value="{{ category.pk }}">{{ category }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="post-form-group">
-                        <label for="title">Title</label>
-                        <input type="text" name="title">
-                    </div>
-    
-                    <div class="post-form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" id="description" cols="20" rows="3"></textarea>
-                    </div>
-                    
-                    <div class="post-form-group">
-                        <label for="videoURL">Video URL</label>
-                        <input type="url" name="video">
-                    </div>
-                    <button class="add-post-form--submit" type="submit">Submit</button>
-                </form>
-            </div>
+            
         </div>
 
         <div class="dashboard-sidebar">
@@ -91,9 +61,7 @@
                 <p>No posts found</p>
             </div>
             {% endif %}
-            <div class="video-backdrop">
-                <div class="video-player"></div>
-            </div>
+
         </div>
     </div>    
 </body>

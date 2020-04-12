@@ -9,5 +9,5 @@ urlpatterns = [
                                      redirect_authenticated_user=True), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
-    path('', include('dashboard.urls')),
+    path('', include('video_dashboard.urls')),
 ]
