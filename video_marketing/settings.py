@@ -38,11 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'disable_cache_headers.apps.DisableCacheHeadersConfig',
     'django_filters',
-    'embed_video',
-    # 'sorl.thumbnail',
-    # 'easy_thumbnails',
     'core',
     'video_dashboard',
 ]
@@ -55,8 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # MIDDLEWARE TO DISABLE CACHE_CONTROL
-    'disable_cache_headers.middleware.DisableCacheControl',
 ]
 
 ROOT_URLCONF = 'video_marketing.urls'
