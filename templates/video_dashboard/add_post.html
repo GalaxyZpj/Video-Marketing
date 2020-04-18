@@ -1,14 +1,23 @@
 <div class="add-post-form-div">
+    <div class="backdrop-close" id="backdrop-close">X</div>
     <h1 class="add-post-form--title">Add Post</h1>
-        <form class="add-post-form" action="" method="POST">
+    <form class="add-post-form" action="{% url 'addPost' %}" method="POST">
         {% csrf_token %}
 
         <div class="post-form-group">
             <label for="category">Category</label>
-            <select name="category">
+            <select name="category" id='category'>
+                <option value="" selected>--</option>
                 {% for category in categories %}
-                <option value="{{ category.pk }}">{{ category }}</option>
+                <option class="selected-category" value="{{ category.pk }}">{{ category }}</option>
                 {% endfor %}
+            </select>
+        </div>
+
+        <div class="post-form-group">
+            <label for="subCategory">Sub Category</label>
+            <select name="sub_category" id="subCategory">
+                <option value="" selected>--</option>
             </select>
         </div>
 
@@ -21,11 +30,48 @@
             <label for="description">Description</label>
             <textarea name="description" id="description" cols="20" rows="3"></textarea>
         </div>
+
+        <div class="post-form-group">
+            <label for="description">Tags</label>
+            <textarea name="tags" id="tags" cols="20" rows="3"></textarea>
+        </div>
         
         <div class="post-form-group">
             <label for="videoURL">Video URL</label>
             <input type="url" name="video">
         </div>
-        <button class="add-post-form--submit" type="submit">Submit</button>
+        <div class="post-form-group-buttons">
+            <button class="backdrop-close add-post-form--cancel">Cancel</button>
+            <button class="add-post-form--submit" type="submit">Add</button>
+        </div>
     </form>
 </div>
+
+<script>
+    $(document).ready(function() {
+
+        $('.backdrop-close').click(function() {
+            $('.backdrop').css('visibility', 'hidden');
+            $('.backdrop').empty();
+        });
+
+        $(document).on('change', '#category', function() {
+            console.log('Button Clicked');
+            let category_id = $(this).val();
+            console.log('Category Selected ' + category_id);
+            $.ajax({
+                method: 'GET',
+                url: '/sub_category/'+category_id,
+                success: response => {
+                    console.log(response);
+                    $('#subCategory').empty()
+                    $('#subCategory').append(response); 
+                },
+                error: error => {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+</script>

@@ -1,9 +1,9 @@
-.login-body {
+.signup-form {
   height: 100vh;
   width: 100vw;
 }
 
-.login-form {
+.signup-form {
   color: #d8d8d8;
   padding: 0 64px;
   text-align: center;
@@ -15,24 +15,20 @@
 }
 
 @media (max-width: 415px) {
-  .login-form {
+  .signup-form {
     padding: 0 32px;
   }
 }
 
-.login-form--title {
+.signup-form--title {
   text-align: center;
   padding: 2rem 0 1rem 0;
   font-weight: 600;
   font-size: xxx-large;
 }
 
-.login-form--error {
-  color: red;
-}
-
-.login-form input,
-.login-form input:focus {
+.signup-form input,
+.signup-form input:focus {
   margin: 1.5rem auto;
   background-color: #00000036;
   color: #d8d8d8;
@@ -40,19 +36,19 @@
 }
 
 @media (max-width: 540px) {
-  .login-form input,
-  .login-form input:focus {
+  .signup-form input,
+  .signup-form input:focus {
     width: 100%;
   }
 }
 
-.login-form button {
+.signup-form button {
   background: #00000083;
   color: #d8d8d8;
 }
 
-.login-form button:hover {
+.signup-form button:hover {
   background: #d8d8d8;
   color: black;
 }
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=signup.css.map */

@@ -1,6 +1,16 @@
-{% load embed_video_tags %}
-
-<div class="video-player">
-    <p>Title: {{ post.title }}</p><br>
-    {% video post.video %}
+<div class="video-player-div">
+    <div class="backdrop-close" id="backdrop-close" style="color: white; float: right;">X</div>
+    <div class="video-player">
+        <p>Title: {{ post.title }}</p><br>
+        <iframe src="{{ post.video }}" frameborder="0" allowfullscreen></iframe>
+    </div>
 </div>
+
+<script>
+
+    $('.backdrop-close').click(function() {
+        $('.backdrop').css('visibility', 'hidden');
+        $('.backdrop').empty();
+    });
+    
+</script>

@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        onBeforePageLoad: function () {
+          $('.loading').show();
+        },
+        onAfterPageLoad: function ($items) {
+          $('.loading').hide();
+        }
+      });
+
     $('.dashboard--post-container').on('click', function() {
         $('.backdrop').css('visibility', 'visible');
         let post_id = $(this).attr('post_id');
@@ -8,21 +18,18 @@ $(document).ready(function() {
         });
     });
 
-    $('.video-backdrop').click(function() {
-        $(this).css('visibility', 'hidden');
-        $(this).empty();
-    });
-
-    $('.dashboard--toolbar-add-post').click(function() {
+    $('#add-post-btn').click(function() {
         $('.backdrop').css('visibility', 'visible');
         $.get('/add_post/', (response) => {
             $('.backdrop').append(response);
         });
     })
 
-    $('.backdrop').click(function() {
-        $(this).css('visibility', 'hidden');
-        $(this).empty();
+    $('#filter-posts').click(function() {
+        $('.backdrop').css('visibility', 'visible');
+        $.get('/filter_videos/', (response) => {
+            $('.backdrop').append(response);
+        });
     });
-
+    
 });
