@@ -6,6 +6,22 @@
   font-family: 'Baloo Thambi 2', cursive;
 }
 
+.paginator {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.paginator a:hover {
+  text-decoration: none;
+}
+
+.paginator p {
+  margin: 0;
+  color: blueviolet;
+  text-decoration: none;
+}
+
 .backdrop {
   position: fixed;
   height: 100vh;
@@ -24,11 +40,44 @@
           align-items: center;
 }
 
+.backdrop-close {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  justify-self: flex-start;
+  z-index: 1;
+  top: 0;
+  right: 2;
+  display: block;
+  width: 25px;
+  height: 25px;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.filter-form {
+  background: white;
+  padding: 8px;
+}
+
 .add-post-form-div {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 32px;
   background-color: white;
-  width: 50vw;
-  height: 60vh;
   border-radius: 8px;
 }
 
@@ -40,24 +89,64 @@
   border-radius: 5px;
 }
 
+.add-post-form-div .add-post-form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .add-post-form-div .add-post-form--title {
   text-align: center;
   margin: 0 0 16px 0;
 }
 
 .add-post-form-div .post-form-group {
+  width: 100%;
   padding: 8px;
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.add-post-form-div .add-post-form--submit {
-  background-color: black;
+.add-post-form-div .post-form-group-buttons {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.add-post-form-div .post-form-group-buttons button {
+  margin: 8px;
   color: white;
-  border: 2px solid blank;
   border-radius: 8px;
   height: 2.7rem;
   width: 4.5rem;
+}
+
+.add-post-form-div .add-post-form--submit {
+  background-color: var(--success);
+}
+
+.add-post-form-div .add-post-form--cancel {
+  background-color: var(--danger);
 }
 
 .video-player {
@@ -252,7 +341,8 @@ iframe {
   width: 32px;
 }
 
-.dashboard--toolbar .dashboard--toolbar-add-post {
+.dashboard--toolbar .dashboard--toolbar-side-btn {
+  text-align: center;
   display: inline-block;
   min-width: 66px;
   color: var(--purple);
@@ -303,6 +393,7 @@ iframe {
   height: 200px;
   width: 100%;
   overflow: hidden;
+  cursor: pointer;
   border: 1px solid black;
   border-radius: 8px;
   -webkit-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.3);
@@ -329,12 +420,10 @@ iframe {
   transition: transform 500ms ease-out, opacity 500ms ease-out, -webkit-transform 500ms ease-out;
 }
 
-.dashboard--posts .dashboard--post-container a {
-  background-size: cover;
-  display: block;
+.dashboard--posts .dashboard--post-container iframe {
   height: 100%;
   width: 100%;
-  cursor: pointer;
+  pointer-events: none;
 }
 
 .dashboard--posts .dashboard--post-container img {
@@ -343,6 +432,7 @@ iframe {
   -o-object-fit: scale-down;
      object-fit: scale-down;
   background: rgba(0, 0, 0, 0.562);
+  z-index: 10;
 }
 
 .dashboard--posts .dashboard--post-container p {

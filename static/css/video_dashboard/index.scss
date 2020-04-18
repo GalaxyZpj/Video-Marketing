@@ -6,6 +6,22 @@
     font-family: 'Baloo Thambi 2', cursive;
 }
 
+.paginator {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    p {
+        margin: 0;
+        color: blueviolet;
+        text-decoration: none;
+    }
+}
+
 .backdrop {
     position: fixed;
     height: 100vh;
@@ -18,11 +34,36 @@
     align-items: center;
 }
 
+.backdrop-close {
+    align-self: flex-end;
+    justify-self: flex-start;
+    z-index: 1;
+    top: 0;
+    right: 2;
+    // color: white;
+    display: block;
+    width: 25px;
+    height: 25px;
+    font-size: 1.2rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.filter-form {
+    background: white;
+    padding: 8px;
+}
+
 .add-post-form-div {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 32px;
     background-color: white;
-    width: 50vw;
-    height: 60vh;
+    // width: 50vw;
+    // height: 60vh;
     border-radius: 8px;
 
     input,
@@ -33,23 +74,46 @@
         border-radius: 5px;
     }
 
+    .add-post-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .add-post-form--title {
         text-align: center;
         margin: 0 0 16px 0;
     }
     
     .post-form-group {
+        width: 100%;
         padding: 8px;
-        display: grid;
+        display: flex;
+        flex-direction: column;
     }
+
+    .post-form-group-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        button {
+            margin: 8px;
+            color: white;
+            // border: 2px solid black;
+            border-radius: 8px;
+            height: 2.7rem;
+            width: 4.5rem;
+        }
+    } 
     
     .add-post-form--submit {
-        background-color: black;
-        color: white;
-        border: 2px solid blank;
-        border-radius: 8px;
-        height: 2.7rem;
-        width: 4.5rem;
+        background-color: var(--success);
+    }
+
+    .add-post-form--cancel {
+        background-color: var(--danger);
     }
 }
 
@@ -187,7 +251,8 @@ iframe {
         }
     }
 
-    .dashboard--toolbar-add-post {
+    .dashboard--toolbar-side-btn {
+        text-align: center;
         display: inline-block;
         min-width: 66px;
         color: var(--purple);
@@ -228,6 +293,7 @@ iframe {
         height: 200px;
         width: 100%;
         overflow: hidden;
+        cursor: pointer;
         border: 1px solid black;
         border-radius: 8px;
         box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.3);
@@ -242,12 +308,18 @@ iframe {
             }
         }
 
-        a {
-            background-size: cover;
-            display: block;
+        // a {
+        //     background-size: cover;
+        //     display: block;
+        //     height: 100%;
+        //     width: 100%;
+        //     cursor: pointer;
+        // }
+
+        iframe {
             height: 100%;
             width: 100%;
-            cursor: pointer;
+            pointer-events: none
         }
         
         img {
@@ -255,6 +327,7 @@ iframe {
             width: 100%;
             object-fit: scale-down;
             background: rgba(0, 0, 0, 0.562);
+            z-index: 10;
         }
 
         p {

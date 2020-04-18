@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+<div class="signup-body">
+    <!-- Signup Form Starts -->
+    <div class="signup-form">
+        <form action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            <div class="signup-form--title">
+                <h2 class="">Welcome</h2>
+                <h4>Please register for an account</h4>
+            </div>
+            <input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name">
+            <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name">
+            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+            <input type="password" class="form-control" id="password" name="password1" placeholder="Password">
+            <input type="password" class="form-control" id="password" name="password2" placeholder="Password again">
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
+    <!-- Signup Form Ends -->
+<!-- 
+</div>
+
+<form action="{% url 'signup' %}" method="POST">
+    {{form.as_p}}
+
+
+    <button type="submit"></button>
+</form> -->
+    
+{% endblock content %}
+    

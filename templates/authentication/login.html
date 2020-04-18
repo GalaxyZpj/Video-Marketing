@@ -7,7 +7,7 @@
 <div class="login-body">
     <!-- Login Form Start -->
     <div class="login-form">
-        <form action="{% url 'login' %}" method="post">
+        <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
             <div class="login-form--title">
                 <h2 class="">Welcome</h2>
@@ -18,7 +18,7 @@
             {% endif %}
             <input type="text" class="form-control" id="username" name="username" placeholder="Username">
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn">Login</button>
         </form>
     </div>
     <!-- Login Form Ends -->
