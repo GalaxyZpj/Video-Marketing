@@ -9,6 +9,31 @@ $(document).ready(function() {
           $('.loading').hide();
         }
       });
+    
+    // FOR DYNAMICALLY LOADED TEMPLATE
+    $(document).on('click', '.backdrop-close', function() {
+        $('.backdrop').css('visibility', 'hidden');
+        $('.backdrop').empty();
+    });
+
+    // FOR DYNAMICALLY LOADED TEMPLATE
+    $(document).on('change', '#category', function() {
+        console.log('Button Clicked');
+        let category_id = $(this).val();
+        console.log('Category Selected ' + category_id);
+        $.ajax({
+            method: 'GET',
+            url: '/sub_category/?category_id='+category_id,
+            success: response => {
+                console.log(response);
+                $('#subCategory').empty()
+                $('#subCategory').append(response); 
+            },
+            error: error => {
+                console.error(error);
+            }
+        });
+    });
 
     $('.dashboard--post-container').on('click', function() {
         $('.backdrop').css('visibility', 'visible');

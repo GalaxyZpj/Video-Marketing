@@ -1,77 +1,48 @@
-<div class="add-post-form-div">
+<div class="backdrop-form-div">
     <div class="backdrop-close" id="backdrop-close">X</div>
-    <h1 class="add-post-form--title">Add Post</h1>
-    <form class="add-post-form" action="{% url 'addPost' %}" method="POST">
+    <h1 class="backdrop-form--title">Add Post</h1>
+    <form class="backdrop-form" action="{% url 'addPost' %}" method="POST">
         {% csrf_token %}
 
-        <div class="post-form-group">
-            <label for="category">Category</label>
-            <select name="category" id='category'>
-                <option value="" selected>--</option>
+        <div class="backdrop-form-group">
+            <label for="category">Category <span style="color: red;">*</span></label>
+            <select name="category" id='category' required>
+                <option value="" selected>---------</option>
                 {% for category in categories %}
                 <option class="selected-category" value="{{ category.pk }}">{{ category }}</option>
                 {% endfor %}
             </select>
         </div>
 
-        <div class="post-form-group">
-            <label for="subCategory">Sub Category</label>
-            <select name="sub_category" id="subCategory">
-                <option value="" selected>--</option>
+        <div class="backdrop-form-group">
+            <label for="subCategory">Sub Category <span style="color: red;">*</span></label>
+            <select name="sub_category" id="subCategory" required>
+                <option value="" selected>---------</option>
             </select>
         </div>
 
-        <div class="post-form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title">
+        <div class="backdrop-form-group">
+            <label for="title">Title <span style="color: red;">*</span></label>
+            <input type="text" name="title" required>
         </div>
 
-        <div class="post-form-group">
+        <div class="backdrop-form-group">
             <label for="description">Description</label>
             <textarea name="description" id="description" cols="20" rows="3"></textarea>
         </div>
 
-        <div class="post-form-group">
-            <label for="description">Tags</label>
-            <textarea name="tags" id="tags" cols="20" rows="3"></textarea>
+        <div class="backdrop-form-group">
+            <label for="tags">Tags <span style="color: red;">*</span></label>
+            <textarea name="tags" id="tags" cols="20" rows="3" required></textarea>
         </div>
         
-        <div class="post-form-group">
-            <label for="videoURL">Video URL</label>
-            <input type="url" name="video">
+        <div class="backdrop-form-group">
+            <label for="videoURL">Video URL <span style="color: red;">*</span></label>
+            <input type="url" name="video" required>
         </div>
-        <div class="post-form-group-buttons">
-            <button class="backdrop-close add-post-form--cancel">Cancel</button>
-            <button class="add-post-form--submit" type="submit">Add</button>
+        <div class="backdrop-form-group-buttons">
+            <button class="backdrop-close backdrop-form--cancel">Cancel</button>
+            <button class="backdrop-form--submit" type="submit">Add</button>
         </div>
     </form>
 </div>
-
-<script>
-    $(document).ready(function() {
-
-        $('.backdrop-close').click(function() {
-            $('.backdrop').css('visibility', 'hidden');
-            $('.backdrop').empty();
-        });
-
-        $(document).on('change', '#category', function() {
-            console.log('Button Clicked');
-            let category_id = $(this).val();
-            console.log('Category Selected ' + category_id);
-            $.ajax({
-                method: 'GET',
-                url: '/sub_category/'+category_id,
-                success: response => {
-                    console.log(response);
-                    $('#subCategory').empty()
-                    $('#subCategory').append(response); 
-                },
-                error: error => {
-                    console.error(error);
-                }
-            });
-        });
-    });
-
-</script>

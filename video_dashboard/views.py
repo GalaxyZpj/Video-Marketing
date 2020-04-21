@@ -40,7 +40,7 @@ class UserDashboard(ListView):
         return context
 
     def get_queryset(self):
-        return Post.objects.filter(user=self.request.user)
+        return Post.objects.filter(user=self.request.user).order_by('-created')
 
 
 class Videos(ListView):
@@ -60,7 +60,7 @@ class Videos(ListView):
 @login_required
 def add_post(request):
     if request.method == 'GET':
-        categories = Category.objects.all()
+        categories = Category.objects.all().order_by('name')
         return render(request, 'video_dashboard/add_post.html', { 'categories': categories })
     else:
         form = {}
@@ -77,9 +77,13 @@ def add_post(request):
         })
 
 @login_required
-def send_sub_categories(request, category_id):
-    sub_categories = SubCategory.objects.filter(category_id=category_id)
-    template = Template('{% for sub_category in sub_categories %}<option value="{{ sub_category.id }}">{{ sub_category.name }}</option>{% endfor %}')
+def send_sub_categories(request):
+    category_id = request.GET.get('category_id', None)
+    if category_id:
+        sub_categories = SubCategory.objects.filter(category_id=category_id).order_by('name')
+    else:
+        sub_categories = SubCategory.objects.all().order_by('name')
+    template = Template('<option value="" selected>---------</option>{% for sub_category in sub_categories %}<option value="{{ sub_category.id }}">{{ sub_category.name }}</option>{% endfor %}')
     return HttpResponse(template.render(RequestContext(request, { 'sub_categories': sub_categories })))
 
 def play_video(request, video_id):
@@ -87,5 +91,8 @@ def play_video(request, video_id):
     return render(request, 'video_dashboard/video.html', { 'post': video })
 
 def filter_videos(request):
+    if request.method == 'GET':
+        categories = Category.objects.all().order_by('name')
+        sub_categories = SubCategory.objects.all().order_by('name')
     posts_filter = PostFilter(request.GET, queryset=Post.objects.all())
-    return render(request, 'video_dashboard/filter.html', { 'posts': posts_filter })
+    return render(request, 'video_dashboard/filter.html', { 'posts': posts_filter, 'categories': categories, 'sub_categories': sub_categories })

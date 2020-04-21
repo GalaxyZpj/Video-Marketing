@@ -23,7 +23,7 @@
             <a href="{% url 'logout' %}">LOGOUT</a>
             {% else %}
             <a href="{% url 'login' %}">LOGIN</a>
-            <a href="">SIGNUP</a>
+            <a href="{% url 'signup' %}">SIGNUP</a>
             {% endif %}
         </div>
         <div class="dashboard-main">
@@ -81,8 +81,5 @@
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
 <script src="{% static 'js/infinite.min.js' %}"></script>
-<script>
-    
-</script>
 
 </html>

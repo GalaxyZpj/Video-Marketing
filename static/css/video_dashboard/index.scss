@@ -40,7 +40,6 @@
     z-index: 1;
     top: 0;
     right: 2;
-    // color: white;
     display: block;
     width: 25px;
     height: 25px;
@@ -49,12 +48,7 @@
     cursor: pointer;
 }
 
-.filter-form {
-    background: white;
-    padding: 8px;
-}
-
-.add-post-form-div {
+.backdrop-form-div {
     flex-basis: 50%;
     display: flex;
     flex-direction: column;
@@ -62,8 +56,6 @@
     align-items: center;
     padding: 32px;
     background-color: white;
-    // width: 50vw;
-    // height: 60vh;
     border-radius: 8px;
 
     input,
@@ -74,7 +66,7 @@
         border-radius: 5px;
     }
 
-    .add-post-form {
+    .backdrop-form {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -82,37 +74,36 @@
         align-items: center;
     }
 
-    .add-post-form--title {
+    .backdrop-form--title {
         text-align: center;
         margin: 0 0 16px 0;
     }
     
-    .post-form-group {
+    .backdrop-form-group {
         width: 100%;
         padding: 8px;
         display: flex;
         flex-direction: column;
     }
 
-    .post-form-group-buttons {
+    .backdrop-form-group-buttons {
         width: 100%;
         display: flex;
         justify-content: center;
         button {
             margin: 8px;
             color: white;
-            // border: 2px solid black;
             border-radius: 8px;
             height: 2.7rem;
             width: 4.5rem;
         }
     } 
     
-    .add-post-form--submit {
+    .backdrop-form--submit {
         background-color: var(--success);
     }
 
-    .add-post-form--cancel {
+    .backdrop-form--cancel {
         background-color: var(--danger);
     }
 }

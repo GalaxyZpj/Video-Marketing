@@ -55,12 +55,7 @@
   cursor: pointer;
 }
 
-.filter-form {
-  background: white;
-  padding: 8px;
-}
-
-.add-post-form-div {
+.backdrop-form-div {
   -ms-flex-preferred-size: 50%;
       flex-basis: 50%;
   display: -webkit-box;
@@ -81,15 +76,15 @@
   border-radius: 8px;
 }
 
-.add-post-form-div input,
-.add-post-form-div select,
-.add-post-form-div textarea {
+.backdrop-form-div input,
+.backdrop-form-div select,
+.backdrop-form-div textarea {
   height: 2.5rem;
   border: 2px solid black;
   border-radius: 5px;
 }
 
-.add-post-form-div .add-post-form {
+.backdrop-form-div .backdrop-form {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -106,12 +101,12 @@
           align-items: center;
 }
 
-.add-post-form-div .add-post-form--title {
+.backdrop-form-div .backdrop-form--title {
   text-align: center;
   margin: 0 0 16px 0;
 }
 
-.add-post-form-div .post-form-group {
+.backdrop-form-div .backdrop-form-group {
   width: 100%;
   padding: 8px;
   display: -webkit-box;
@@ -123,7 +118,7 @@
           flex-direction: column;
 }
 
-.add-post-form-div .post-form-group-buttons {
+.backdrop-form-div .backdrop-form-group-buttons {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -133,7 +128,7 @@
           justify-content: center;
 }
 
-.add-post-form-div .post-form-group-buttons button {
+.backdrop-form-div .backdrop-form-group-buttons button {
   margin: 8px;
   color: white;
   border-radius: 8px;
@@ -141,11 +136,11 @@
   width: 4.5rem;
 }
 
-.add-post-form-div .add-post-form--submit {
+.backdrop-form-div .backdrop-form--submit {
   background-color: var(--success);
 }
 
-.add-post-form-div .add-post-form--cancel {
+.backdrop-form-div .backdrop-form--cancel {
   background-color: var(--danger);
 }
 
