@@ -10,5 +10,5 @@ urlpatterns = [
     path('filter_videos/', filter_videos, name='filter-videos'),
     path('play/<slug:video_id>', play_video, name='play'),
     path('add_post/', add_post, name='addPost'),
-    path('sub_category/<slug:category_id>', send_sub_categories, name='sub-category'),
+    path('sub_category/', send_sub_categories, name='sub-category'),
 ]
