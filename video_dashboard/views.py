@@ -76,7 +76,6 @@ def add_post(request):
             'posts': posts,
         })
 
-@login_required
 def send_sub_categories(request):
     category_id = request.GET.get('category_id', None)
     if category_id:
