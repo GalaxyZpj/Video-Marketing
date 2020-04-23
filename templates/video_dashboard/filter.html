@@ -3,6 +3,8 @@
     <h1 class="backdrop-form--title">Filter | Sort</h1>
     <form class="backdrop-form" method="GET">
 
+        <input type="text" value="{{ type }}" name="type" style="display: none;">
+
         <div class="backdrop-form-group">
             {{ posts.form.category.label_tag }}
             <select name="category" id='category'>

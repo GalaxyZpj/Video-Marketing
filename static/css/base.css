@@ -15,10 +15,7 @@ body {
   height: 100vh !important;
   width: 100vw !important;
   margin: 0;
-  background: url(/static/images/background.jpg) no-repeat;
   background-size: cover;
-  -webkit-backdrop-filter: blur(8px) !important;
-          backdrop-filter: blur(8px) !important;
 }
 
 .container-fluid {
@@ -50,6 +47,19 @@ body {
   display: inline-block;
 }
 
+.nav-link:hover {
+  color: var(--purple);
+}
+
+#login {
+  color: white;
+  cursor: pointer;
+}
+
+#login:hover {
+  color: var(--purple);
+}
+
 .nav-link--signup {
   margin-top: 0;
   padding: 2px 0 2px 0;
@@ -59,7 +69,7 @@ body {
   font-weight: bold;
 }
 
-.nav-link--signup :hover {
+.nav-link--signup:hover {
   color: black;
   background: white;
 }

@@ -1,3 +1,8 @@
+body {
+    background: url(/static/images/background2.jpg) no-repeat;
+    background-size: cover;
+}
+
 .login-body {
     // background: url(/static/images/background.jpg) no-repeat;
     // background-size: cover;
@@ -8,7 +13,8 @@
 }
 
 .login-form {
-    color: #d8d8d8;
+    // color: #d8d8d8;
+    color: #00000083;
     padding: 0 64px;
     text-align: center;
     top: 20%;

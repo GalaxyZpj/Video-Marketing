@@ -38,6 +38,12 @@ class SubCategory(models.Model):
 
 
 class Post(models.Model):
+    POST_TYPE = [
+        ('webinar', 'Webinar'),
+        ('video', 'Video'),
+        ('upcoming', 'Upcoming'),
+    ]
+    type = models.CharField('Post Type', max_length=16, blank=False, choices=POST_TYPE)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False)
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=False)
