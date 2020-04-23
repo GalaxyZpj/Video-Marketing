@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.template import Template, RequestContext
 from django.db.models import Q
@@ -9,6 +10,15 @@ from django_filters.views import FilterMixin, FilterView
 from core.models import *
 from .forms import *
 from .filters import PostFilter
+
+
+class Login(LoginView):
+    def get_template_names(self):
+        backdrop_login = self.request.GET.get('backdrop', None)
+        if backdrop_login:
+            return ['authentication/backdropLogin.html']
+        else:
+            return ['authentication/login.html']
 
 
 def signup(request):
@@ -48,13 +58,22 @@ class Videos(ListView):
     paginate_by = 9
     template_name = 'video_dashboard/index.html'
     context_object_name = 'posts'
+    filterset_class = PostFilter
+    def get_context_data(self, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['type'] = self.request.GET.get('type')
+        return context
 
     def get_queryset(self):
+        type = self.request.GET.get('type')
         search_q = self.request.GET.get('search')
         if search_q:
-            qs = Post.objects.filter(Q(title__icontains=search_q) | Q(tags__icontains=search_q)).order_by('-created')
+            qs = Post.objects.filter(Q(title__icontains=search_q) | Q(tags__icontains=search_q)).filter(type=type).order_by('-created')
         else:
-            qs = PostFilter(self.request.GET, queryset=Post.objects.all().order_by('-created')).qs
+            # qs = PostFilter(self.request.GET, queryset=Post.objects.filter(type=type).order_by('-created')).qs
+            self.filterset = self.filterset_class(self.request.GET, queryset=Post.objects.filter(type=type).order_by('-created'))
+            # self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
+            qs = self.filterset.qs.distinct()
         return qs
 
 @login_required
@@ -64,13 +83,15 @@ def add_post(request):
         return render(request, 'video_dashboard/add_post.html', { 'categories': categories })
     else:
         form = {}
-        category_id = request.POST['category']
-        sub_category = request.POST['sub_category']
+        print('\n\n', request.POST)
+        form['type'] = request.POST['type']
+        form['category_id'] = request.POST['category']
+        form['sub_category_id'] = request.POST['sub_category']
         form['title'] = request.POST['title']
         form['description'] = request.POST['description']
         form['tags'] = request.POST['tags']
         form['video'] = request.POST['video']
-        Post.objects.create(user=request.user, category_id=category_id, sub_category_id=sub_category, **form)
+        Post.objects.create(user=request.user, **form)
         posts = Post.objects.filter(user=request.user).order_by('-created')
         return render(request, 'video_dashboard/index.html', {
             'posts': posts,
@@ -91,7 +112,8 @@ def play_video(request, video_id):
 
 def filter_videos(request):
     if request.method == 'GET':
+        type = request.GET.get('type')
         categories = Category.objects.all().order_by('name')
         sub_categories = SubCategory.objects.all().order_by('name')
-    posts_filter = PostFilter(request.GET, queryset=Post.objects.all())
-    return render(request, 'video_dashboard/filter.html', { 'posts': posts_filter, 'categories': categories, 'sub_categories': sub_categories })
+        posts_filter = PostFilter(request.GET, queryset=Post.objects.filter(type=type))
+        return render(request, 'video_dashboard/filter.html', { 'posts': posts_filter, 'categories': categories, 'sub_categories': sub_categories, 'type': type })

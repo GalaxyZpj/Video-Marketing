@@ -5,6 +5,16 @@
         {% csrf_token %}
 
         <div class="backdrop-form-group">
+            <label for="postType">Post Type <span style="color: red;">*</span></label>
+            <select name="type" id='type' required>
+                <option value="" selected>---------</option>
+                <option value="video">Video</option>
+                <option value="webinar">Webinar</option>
+                <option value="upcoming">Upcoming</option>
+            </select>
+        </div>
+
+        <div class="backdrop-form-group">
             <label for="category">Category <span style="color: red;">*</span></label>
             <select name="category" id='category' required>
                 <option value="" selected>---------</option>

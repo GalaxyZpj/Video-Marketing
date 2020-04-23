@@ -1,22 +1,18 @@
 $(document).ready(function() {
-
-    var infinite = new Waypoint.Infinite({
-        element: $('.infinite-container')[0],
-        onBeforePageLoad: function () {
-          $('.loading').show();
-        },
-        onAfterPageLoad: function ($items) {
-          $('.loading').hide();
-        }
-      });
     
-    // FOR DYNAMICALLY LOADED TEMPLATE
+    // $(document).on('click', '#login', function() {
+    //     console.log('VISIBLE');
+    //     $('.backdrop').css('visibility', 'visible');
+    //     $.get('/login/?backdrop=true', (response) => {
+    //         $('.backdrop').append(response);
+    //     });
+    // });
+
     $(document).on('click', '.backdrop-close', function() {
         $('.backdrop').css('visibility', 'hidden');
         $('.backdrop').empty();
     });
 
-    // FOR DYNAMICALLY LOADED TEMPLATE
     $(document).on('change', '#category', function() {
         console.log('Button Clicked');
         let category_id = $(this).val();
@@ -35,7 +31,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.dashboard--post-container').on('click', function() {
+    $(document).on('click', '.dashboard--post-container', function() {
         $('.backdrop').css('visibility', 'visible');
         let post_id = $(this).attr('post_id');
         $.get('/play/'+post_id, (response) => {
@@ -52,7 +48,9 @@ $(document).ready(function() {
 
     $('#filter-posts').click(function() {
         $('.backdrop').css('visibility', 'visible');
-        $.get('/filter_videos/', (response) => {
+        var urlParams = new URLSearchParams(window.location.search);
+        let post_type = urlParams.get('type');
+        $.get('/filter_videos/?type='+post_type, (response) => {
             $('.backdrop').append(response);
         });
     });

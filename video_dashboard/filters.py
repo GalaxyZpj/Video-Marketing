@@ -13,7 +13,7 @@ class PostFilter(django_filters.FilterSet):
 
     class Meta:
         model = Post
-        fields = ['category', 'sub_category']
+        fields = ['type', 'category', 'sub_category']
     
     def sort(self, queryset, name, value):
         exp = 'created' if value == 'oldest' else '-created'
