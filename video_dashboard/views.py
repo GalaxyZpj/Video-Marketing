@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
@@ -24,18 +24,13 @@ class Login(LoginView):
 def signup(request):
     if request.method == 'GET':
         form = UserForm()
-        return render(request, 'authentication/signup.html', { 'form': form })
     else:
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-        return render(request, 'authentication/login.html')
-
-
-# class Signup(FormView):
-#     template_name = 'authentication/signup.html'
-#     form_class = UserForm
-#     success_url = '/login/'
+            return redirect('login')
+        # return render(request, 'authentication/login.html')
+    return render(request, 'authentication/signup.html', { 'form': form })
 
 
 class UserDashboard(ListView):

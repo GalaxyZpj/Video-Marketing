@@ -18,7 +18,7 @@ body {
 }
 
 .signup-form {
-  color: #00000083;
+  color: black;
   text-align: center;
   margin: 0;
   display: block;
@@ -40,7 +40,7 @@ body {
 .signup-form input,
 .signup-form input:focus {
   margin: 1.5rem auto;
-  background-color: #00000036;
+  background-color: rgba(0, 0, 0, 0.788);
   color: #d8d8d8;
   width: 400px;
 }
@@ -53,7 +53,7 @@ body {
 }
 
 .signup-form button {
-  background: #00000083;
+  background-color: rgba(0, 0, 0, 0.808);
   color: #d8d8d8;
 }
 
