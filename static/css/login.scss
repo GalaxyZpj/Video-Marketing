@@ -14,7 +14,7 @@ body {
 
 .login-form {
     // color: #d8d8d8;
-    color: #00000083;
+    color: black;
     padding: 0 64px;
     text-align: center;
     top: 20%;
@@ -42,7 +42,7 @@ body {
 .login-form input,
 .login-form input:focus {
     margin: 1.5rem auto;
-    background-color: #00000036;
+    background-color: rgba(0, 0, 0, 0.808);
     color: #d8d8d8;
     width: 400px;
     @media (max-width: 540px) {
@@ -51,7 +51,7 @@ body {
 }
 
 .login-form button {
-    background:  #00000083;
+    background-color: rgba(0, 0, 0, 0.808);
     color: #d8d8d8;
 }
 
