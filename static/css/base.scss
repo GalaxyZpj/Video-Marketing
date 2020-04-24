@@ -59,19 +59,29 @@ body {
 }
 
 .nav-link--signup {
-    margin-top: 0;
-    padding: 2px 0 2px 0;
-    border: 2px solid white;
-    border-radius: 8px;
-    background: var(--purple, purple);
-    font-weight: bold;
+    @media screen and (min-width: 992px) {
+        margin-top: 0;
+        padding: 2px 0 2px 0;
+        border: 2px solid white;
+        border-radius: 8px;
+        background: var(--purple, purple);
+        font-weight: bold;
 
-    &:hover {
-        color: black;
-        background: white;
+        &:hover {
+            color: black;
+            background: white;
+        }
     }
 }
 
-.navbar-toggler-icon { 
-    color: white;
+.navbar-toggler {
+    // background: url(/static/images/menu.png);
+    
+}
+
+.navbar-toggler-icon img { 
+    // background: url(/static/images/menu.png);
+    // background-color: red;
+    height: 100%;
+    width: 100%;
 }

@@ -18,15 +18,16 @@ body {
 }
 
 .signup-form {
+  overflow-y: auto;
+  max-height: 100vh;
   color: black;
   text-align: center;
-  margin: 0;
   display: block;
 }
 
 @media (max-width: 415px) {
   .signup-form {
-    padding: 0 32px;
+    padding: 24px 32px;
   }
 }
 

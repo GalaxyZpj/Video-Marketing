@@ -46,6 +46,7 @@ iframe {
 }
 
 .dashboard-sidebar {
+    overflow: hidden;
     left: 0;
     position: fixed;
     z-index: 1;
@@ -67,6 +68,7 @@ iframe {
     }
 
     .sidebar-back {
+        overflow: hidden;
         border-bottom: 2px solid #ffe4e1;
         border-radius: 16px;
         @media screen and (max-width: 768px) {
@@ -76,6 +78,11 @@ iframe {
         &:hover {
             border-radius: 0;
         }
+    }
+
+    .sidebar-username {
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     a {
@@ -123,9 +130,13 @@ iframe {
     @media screen and (max-width: 430px) {
         flex-direction: column;
         align-items: flex-start;
-        flex-wrap: wrap;
-        .dashboard--toolbar-add-post {
-            margin: 8px 0 8px 5px;
+        flex-wrap: wrap-reverse;
+        justify-content: space-between;
+        .dashboard--toolbar-side-btn {
+            // position: fixed;
+            margin: 16px 0 0 5px;
+            // top: 12%;
+            // justify
         }
         .dashboard--toolbar-search-form {
             width: 100%;

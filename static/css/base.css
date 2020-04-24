@@ -60,21 +60,23 @@ body {
   color: var(--purple);
 }
 
-.nav-link--signup {
-  margin-top: 0;
-  padding: 2px 0 2px 0;
-  border: 2px solid white;
-  border-radius: 8px;
-  background: var(--purple, purple);
-  font-weight: bold;
+@media screen and (min-width: 992px) {
+  .nav-link--signup {
+    margin-top: 0;
+    padding: 2px 0 2px 0;
+    border: 2px solid white;
+    border-radius: 8px;
+    background: var(--purple, purple);
+    font-weight: bold;
+  }
+  .nav-link--signup:hover {
+    color: black;
+    background: white;
+  }
 }
 
-.nav-link--signup:hover {
-  color: black;
-  background: white;
-}
-
-.navbar-toggler-icon {
-  color: white;
+.navbar-toggler-icon img {
+  height: 100%;
+  width: 100%;
 }
 /*# sourceMappingURL=base.css.map */

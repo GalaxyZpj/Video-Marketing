@@ -51,6 +51,7 @@ iframe {
 }
 
 .dashboard-sidebar {
+  overflow: hidden;
   left: 0;
   position: fixed;
   z-index: 1;
@@ -89,6 +90,7 @@ iframe {
 }
 
 .dashboard-sidebar .sidebar-back {
+  overflow: hidden;
   border-bottom: 2px solid #ffe4e1;
   border-radius: 16px;
 }
@@ -102,6 +104,11 @@ iframe {
 
 .dashboard-sidebar .sidebar-back:hover {
   border-radius: 0;
+}
+
+.dashboard-sidebar .sidebar-username {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dashboard-sidebar a {
@@ -171,11 +178,14 @@ iframe {
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: flex-start;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
-  .dashboard--toolbar .dashboard--toolbar-add-post {
-    margin: 8px 0 8px 5px;
+  .dashboard--toolbar .dashboard--toolbar-side-btn {
+    margin: 16px 0 0 5px;
   }
   .dashboard--toolbar .dashboard--toolbar-search-form {
     width: 100%;
