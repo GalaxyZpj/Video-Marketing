@@ -61,6 +61,7 @@ class Videos(ListView):
 
     def get_queryset(self):
         type = self.request.GET.get('type')
+        print('\n\n', type)
         search_q = self.request.GET.get('search')
         if search_q:
             qs = Post.objects.filter(Q(title__icontains=search_q) | Q(tags__icontains=search_q)).filter(type=type).order_by('-created')

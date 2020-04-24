@@ -32,8 +32,10 @@
 }
 
 .backdrop-form-div {
-  -ms-flex-preferred-size: 40%;
-      flex-basis: 40%;
+  max-height: 95vh;
+  overflow-y: auto;
+  -ms-flex-preferred-size: 60%;
+      flex-basis: 60%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -50,6 +52,20 @@
   padding: 32px;
   background-color: white;
   border-radius: 8px;
+}
+
+@media screen and (max-width: 850px) {
+  .backdrop-form-div {
+    -ms-flex-preferred-size: 80%;
+        flex-basis: 80%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .backdrop-form-div {
+    -ms-flex-preferred-size: 95%;
+        flex-basis: 95%;
+  }
 }
 
 .backdrop-form-div input,

@@ -24,12 +24,20 @@
   height: 100%;
 }
 
+@media screen and (max-width: 768px) {
+  .tiles {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .tile-container {
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-radius: 5px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -43,6 +51,15 @@
   height: 270px;
   width: 270px;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .tile-container {
+    border-radius: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .tile {
@@ -66,10 +83,30 @@
   border-radius: 8px;
 }
 
+@media screen and (max-width: 1110px) {
+  .tile {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .tile {
+    width: 90%;
+  }
+}
+
 .tile p {
   margin: 0;
   padding-top: 24px;
   font-size: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .tile p {
+    font-size: 1.6rem;
+    height: 100%;
+    margin-bottom: 32px;
+  }
 }
 
 .tile:hover {
@@ -90,6 +127,17 @@
   height: 80px;
   width: 80px;
   margin-top: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .tile {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+  .tile img {
+    margin-top: 32px;
+  }
 }
 
 .tile-1 {

@@ -14,7 +14,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{% static 'images/carousel-1.jpg' %}" class="d-block w-100" alt="...">
+            <img src="{% static 'images/carousel-1.jpg' %}" class="d-block w-100 carousel-image-1" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <!-- <h5>First slide label</h5> -->
               <!-- <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> -->
@@ -22,7 +22,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img src="{% static 'images/carousel-2.jpg' %}" class="d-block w-100" alt="...">
+            <img src="{% static 'images/carousel-2.jpg' %}" class="d-block w-100 carousel-image-2" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <!-- <h5>Second slide label</h5> -->
               <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
@@ -86,5 +86,21 @@
   // $('.carousel', 'section').SnapScroll({
   //   animateDuration:750
   // });
+</script>
+<script>
+  function changeImages(x) {
+    if (x.matches) { // If media query matches
+      $('.carousel-image-1').attr("src", "{% static 'images/mobile-carousel-1.jpg' %}");
+      $('.carousel-image-2').attr("src", "{% static 'images/mobile-carousel-2.jpg' %}");
+    } else {
+      $('.carousel-image-1').attr("src", "{% static 'images/carousel-1.jpg' %}");
+      $('.carousel-image-2').attr("src", "{% static 'images/carousel-2.jpg' %}");
+    }
+  }
+
+  var scr = window.matchMedia("(max-width: 768px)");
+  changeImages(scr);
+  scr.addEventListener(changeImages);
+  
 </script>
 {% endblock content %}
