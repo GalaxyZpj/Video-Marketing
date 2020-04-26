@@ -54,19 +54,22 @@
   <!-- <section> -->
   <div class="tiles">
     <div class="tile-container tile-container-1">
-      <a href="{% url 'videos' %}?type=upcoming" class="tile tile-1">
+      
+      <a href="{% url 'posts' post_type='upcoming' %}" class="tile tile-1">
         <img src="{% static 'images/home/upcoming.png' %}">
         <p>Upcoming</p>
       </a>
     </div>
     <div class="tile-container tile-container-2">
-      <a href="{% url 'videos' %}?type=webinar" class="tile tile-2">
+      
+      <a href="{% url 'posts' post_type='webinar' %}" class="tile tile-2">
         <img src="{% static 'images/home/webinar.png' %}">
         <p>Webinar</p>
       </a>
     </div>
     <div class="tile-container tile-container-3">
-      <a href="{% url 'videos' %}?type=video" class="tile tile-3">
+      
+      <a href="{% url 'posts' post_type='video' %}" class="tile tile-3">
         <img src="{% static 'images/home/video.png' %}">
         <p>Video</p>
       </a>

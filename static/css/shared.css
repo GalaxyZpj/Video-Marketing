@@ -2,7 +2,7 @@
   position: fixed;
   height: 100vh;
   width: 100vw;
-  z-index: 999999;
+  z-index: 10000;
   background: #000000d0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -31,11 +31,21 @@
   cursor: pointer;
 }
 
+.backdrop-form-scroll {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
 .backdrop-form-div {
-  max-height: 95vh;
-  overflow-y: auto;
-  -ms-flex-preferred-size: 60%;
-      flex-basis: 60%;
+  position: relative;
+  height: 80%;
+  overflow: hidden;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,12 +95,14 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  overflow-y: scroll;
+}
+
+.backdrop-form-div .backdrop-form::-webkit-scrollbar {
+  display: none;
 }
 
 .backdrop-form-div .backdrop-form--title {

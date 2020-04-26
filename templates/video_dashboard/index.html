@@ -35,13 +35,17 @@
         </div>
         <div class="dashboard-main">
             <div class="dashboard--toolbar">
-                <form class="dashboard--toolbar-search-form" action="{% url 'videos' %}">
+                {% if type %}
+                <form class="dashboard--toolbar-search-form" action="{% url 'posts' post_type=type %}">
+                {% else %}
+                <form class="dashboard--toolbar-search-form" action="{% url 'posts' post_type=None %}"></form>
+                {% endif %}
                     <input class="search-bar" type="text" name="search" placeholder="Search">
                     <span class=search-submit><button type="submit"><i class="fa fa-search"></i></button></span>
                 </form>
                 {% if request.path == '/dashboard/' or request.path == '/add_post/' %}
                 <a class="dashboard--toolbar-side-btn" id="add-post-btn">Add Post</a>
-                {% elif request.path == '/video/' %}
+                {% else %}
                 <a class="dashboard--toolbar-side-btn" id="filter-posts">Filter|Sort</a>
                 {% endif %}
             </div>
@@ -64,7 +68,7 @@
 
             <div class="paginator">
                 {% if page_obj.has_next %}
-                <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}&type={{ type }}"><p>Load more posts</p></a>
+                <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"><p>Load more posts</p></a>
                 {% else %}
                 <p>End of posts</p>
                 {% endif %}

@@ -1,9 +1,11 @@
+$backdrop-background-color: #000000d0;
+
 .backdrop {
     position: fixed;
     height: 100vh;
     width: 100vw;
-    z-index: 999999;
-    background: #000000d0;
+    z-index: 10000;
+    background: $backdrop-background-color;
     display: flex;
     visibility: hidden;
     justify-content: center;
@@ -24,10 +26,20 @@
     cursor: pointer;
 }
 
+.backdrop-form-scroll {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
 .backdrop-form-div {
-    max-height: 95vh;
-    overflow-y: auto;
-    flex-basis: 60%;
+    position: relative;
+    height: 80%;
+    overflow: hidden;
+    flex-basis: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,8 +66,13 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        // justify-content: center;
         align-items: center;
+        overflow-y: scroll;
+        
+    }
+    .backdrop-form::-webkit-scrollbar {
+        display: none;
     }
 
     .backdrop-form--title {

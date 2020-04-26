@@ -3,6 +3,60 @@ $tile-hover-color-2: #2b22ad;
 
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400;500;600;700;800&display=swap');
 
+@mixin create-post-link {
+    // color: white;
+    margin-top: 0;
+    padding: 2px 8px 2px 8px;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-weight: 700;
+    color: white;
+    background: black;
+    &:hover {
+        background: var(--purple);
+    }
+}
+
+@mixin navbar-theme(
+    $nav-bg,
+    $nav-link-color,
+    $nav-link-color-hover,
+    $nav-link-signup-font-color,
+    $nav-link-signup-bg-color,
+    $nav-link-signup-bg-color-hover,
+    $nav-link-signup-font-color-hover
+) {
+    background: $nav-bg;
+    justify-content: space-between;
+    height: 55px;
+    .nav-link {
+        color: $nav-link-color;
+        margin: 4px 0 0 1rem;
+        padding: 0;
+        display: inline-block;
+        &:hover {
+            color: $nav-link-color-hover;
+        }
+    }
+
+    .nav-link--signup {
+        @media screen and (min-width: 992px) {
+            color: $nav-link-signup-font-color;
+            margin-top: 0;
+            padding: 2px 0 2px 0;
+            border: 2px solid white;
+            border-radius: 8px;
+            background: $nav-link-signup-bg-color;
+            font-weight: bold;
+    
+            &:hover {
+                color: $nav-link-signup-bg-color-hover;
+                background: $nav-link-signup-font-color-hover;
+            }
+        }
+    }
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Baloo Thambi 2', cursive;
@@ -18,21 +72,23 @@ body {
     height: 100vh !important;
     width: 100vw !important;
     margin: 0;
-    // background: url(/static/images/background2.jpg) no-repeat;
-    // background: #f5f5f5;
-    // background: linear-gradient(#892be2, #372be2);
     background-size: cover;
-    // backdrop-filter: blur(5px) !important;
-}
-
-.container-fluid {
-    padding: 0;
 }
 
 .navbar-custom-bg-dark {
-    background: linear-gradient(#000, #0000);
-    justify-content: space-between;
+    @include navbar-theme(linear-gradient(#000, #0000), white, var(--purple), white, var(--purple, purple), black, white);
+}
 
+.navbar-galaxyzpj {
+    @include navbar-theme(white, black, var(--purple), var(--purple), none, purple, none);
+}
+
+.navbar-brand {
+    color: var(--purple);
+    font-weight: 700;
+    &:hover {
+        color: purple;
+    }
 }
 
 .navbar-collapse {
@@ -40,48 +96,48 @@ body {
     align-items: center;
 }
 
-.nav-link {
-    color: white;
-    margin: 4px 0 0 1rem;
-    padding: 0;
-    display: inline-block;
-    &:hover {
-        color: var(--purple);
-    }
+.nav-collapse-btn-group {
+    display: flex;
+    justify-content: flex-end;
 }
 
-#login {
-    color: white;
+#createPost {
     cursor: pointer;
-    &:hover {
-        color: var(--purple);
-    }
-}
-
-.nav-link--signup {
+    color: white;
+    display: none;
     @media screen and (min-width: 992px) {
-        margin-top: 0;
-        padding: 2px 0 2px 0;
-        border: 2px solid white;
-        border-radius: 8px;
-        background: var(--purple, purple);
-        font-weight: bold;
-
-        &:hover {
-            color: black;
-            background: white;
-        }
+        @include create-post-link;
+        display: inline-block;
+    }
+    &:hover {
+        // color: var(--purple);
     }
 }
+
+.create-post-btn {
+    background: transparent;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    @media screen and (min-width: 992px) {
+        display: none;
+    }
+}
+
+#createPostCollapsed {
+    // @include create-post-link;
+    display: block;
+    margin: 0 5px;
+    background: url(/static/images/add-post.png);
+}
+
+
 
 .navbar-toggler {
-    // background: url(/static/images/menu.png);
-    
+    padding: 0;
 }
 
 .navbar-toggler-icon img { 
-    // background: url(/static/images/menu.png);
-    // background-color: red;
     height: 100%;
     width: 100%;
 }

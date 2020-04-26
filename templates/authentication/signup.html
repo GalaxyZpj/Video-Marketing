@@ -21,6 +21,16 @@
             <p style="color: red;">{{ form.mobile.errors }}</p>
             <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             <p style="color: red;">{{ form.email.errors }}</p>
+            <input type="text" class="form-control" id="companyName" name="company_name" placeholder="Company Name" required>
+            <p style="color: red;">{{ form.company_name.errors }}</p>
+            <label for="companySize">Company Size</label>
+            <select name="company_size" id="companySize" required>
+                <option value="" selected>---------</option>>
+                <option value="1-10">1-10</option>
+                <option value="11-50">11-50</option>
+                <option value="51-200">51-200</option>
+                <option value="200+">200+</option>
+            </select>
             <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
             <p style="color: red;">{{ form.username.errors }}</p>
             <input type="password" class="form-control" id="password" name="password1" placeholder="Password" required>

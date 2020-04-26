@@ -5,7 +5,15 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    COMPANY_SIZE_CHOICES = [
+        ('1-10', '1-10'),
+        ('11-50', '11-50'),
+        ('51-200', '51-200'),
+        ('200+', '200+'),
+    ]
     mobile = models.CharField("Mobile", max_length=16, blank=False)
+    company_name = models.CharField("Company Name", max_length=64, blank=False)
+    company_size = models.CharField("Company Size", max_length=16, choices=COMPANY_SIZE_CHOICES, blank=False)
 
     def __str__(self):
         return self.username

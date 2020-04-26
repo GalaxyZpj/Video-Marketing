@@ -7,8 +7,8 @@ from video_dashboard.views import Login
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    # path('login/', Login.as_view(redirect_authenticated_user=True), name='login'),
-    path('login/', LoginView.as_view(template_name='authentication/login.html', redirect_authenticated_user=True), name='login'),
+    # path('login/', LoginView.as_view(template_name='authentication/login.html'), name='login'),
+    path('login/', Login.as_view(template_name='authentication/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
     path('', include('video_dashboard.urls')),

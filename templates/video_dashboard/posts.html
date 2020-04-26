@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load param_replace %}
+
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/video_dashboard/posts.css' %}">
+
+<div class="dashboard">
+
+    <div class="sidebar">
+        <div class="sidebar-title">Filters</div>
+        <div class="post-type-filterbox">
+            <p class="post-type-filterbox--title">{% if request.path != '/user/dashboard/' %}Show results for{% else %}Post Type{% endif %}</p>
+            <ul class="post-type-filterbox--options">
+                
+                {% if request.path == '/user/dashboard/' %}
+                <li><button name="post_type" value=""><a href="?"><i class="fas fa-angle-right"></i>All</a></button></li>
+                {% endif %}
+                <li><button name="post_type" value="video"><a href="{% if request.path != '/user/dashboard/' %}/posts/video{% else %}?type=video{% endif %}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;Video</a></button></li>
+                <li><button name="post_type" value="webinar"><a href="{% if request.path != '/user/dashboard/' %}/posts/webinar{% else %}?type=webinar{% endif %}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;Webinar</a></button></li>
+                <li><button name="post_type" value="upcoming"><a href="{% if request.path != '/user/dashboard/' %}/posts/upcoming{% else %}?type=upcoming{% endif %}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;Upcoming</a></button></li>
+            </ul>
+        </div>
+        <form>
+            <div class="category-filterbox">
+                <p class="category-filterbox--title">Category</p>
+                <ul class="category-filterbox--options">
+                    <li><button name="category" class="category-choices" value=""><i class="fas fa-angle-right"></i>&nbsp;&nbsp;All</button></li>
+                    {% for category in categories %}
+                    <li><button name="category" class="category-choices" value="{{ category.id }}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;{{ category.name }}</button></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="sub-category-filterbox">
+                <p class="sub-category-filterbox--title">Sub Category</p>
+                <ul class="sub-category-filterbox--options">
+                    <li><button name="sub_category" value=""><i class="fas fa-angle-right"></i>&nbsp;&nbsp;All</button></li>
+                    {% for sub_category in sub_categories %}
+                    <li><button name="sub_category" value="{{ sub_category.id }}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;{{ sub_category.name }}</button></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <div class="post-main">
+
+        <div class="toolbar">
+            <form class="toolbar-filter-form">
+                <div class="search-bar-group">
+                    <input class="search-bar" type="text" name="search" placeholder="Search" value="{{ request.GET.search }}">
+                    <span class=search-submit><button><i class="fa fa-search"></i></button></span>
+                </div>
+                <div class="sort-group">
+                    <!-- <label for="sort">Sort:&nbsp;</label> -->
+                    <button name="sort_by" value="latest"><i class="fas fa-angle-up"></i></button>
+                    <button name="sort_by" value="oldest"><i class="fas fa-angle-down"></i></button>
+                </div>
+            </form>
+            {% if request.path == '/dashboard/' or request.path == '/add_post/' %}
+            <a class="toolbar-side-btn" id="add-post-btn">Add Post</a>
+            {% endif %}
+        </div>
+
+        <!-- <div class="post-grid-group"> -->
+        <div class="post-grid-container">
+            <div class="post-grid" id="post-grid">
+                {% for post in posts %}
+                <div class="post-container" post_id="{{ post.id }}">
+                    <iframe class="post-video-frame" src="{{ post.video }}" frameborder="0" allowfullscreen></iframe>
+                    <p class="post-title">{{ post.title }}</p>
+                    <p class="post-company">@{{ post.user.company_name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="paginator">
+            {% if page_obj.has_previous %}
+            <!-- <a class="paginator-previous" href="?{{ request.GET.urlencode }}{% if request.GET.urlencode%}&{% endif %}page={{ page_obj.previous_page_number }}"><p>Previous</p></a> -->
+            <a class="paginator-previous" href="?{% param_replace page=page_obj.previous_page_number %}"><p><i class="fas fa-angle-double-left"></i></p></a>
+            {% endif %} 
+
+            {% if is_paginated %}
+            <p class="paginator-pages">{{ paginator.count }} results | Page {{ page_obj.number }} of {{ paginator.num_pages }}</p>
+            {% else %}
+            <p class="paginator-pages">{{ paginator.count }} results</p>
+            {% endif %}
+    
+            {% if page_obj.has_next %}
+            <!-- <a class="paginator-next" href="?{{ request.GET.urlencode }}{% if request.GET.urlencode%}&{% endif %}page={{ page_obj.next_page_number }}"><p>Next</p></a> -->
+            <a class="paginator-next" href="?{% param_replace page=page_obj.next_page_number %}"><p><i class="fas fa-angle-double-right"></i></p></a>
+            {% endif %}
+        </div>
+
+        <!-- </div> -->
+
+    </div>
+
+</div>
+<script src="https://kit.fontawesome.com/fa0ed5f5d1.js" crossorigin="anonymous"></script>
+{% endblock content %}
