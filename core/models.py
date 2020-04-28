@@ -57,6 +57,7 @@ class Post(models.Model):
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=False)
     title = models.CharField("Post Title", max_length=128, blank=False)
     description = models.TextField("Post Description", max_length=1024, blank=True)
+    date = models.DateField("Date", blank=True, null=True)
     tags = models.TextField("Tags", max_length=1024, blank=True)
     video = models.URLField("Video URL")
     created = models.DateTimeField(auto_now_add=True)

@@ -36,8 +36,9 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
-    return render(request, 'authentication/signup.html', { 'form': form })
+            request.user.message_set.create(message="Registration successful. Please login with your credentials")
+            return redirect(reverse('login'))
+    return render(request, 'authentication/auth.html', { 'form': form })
 
 
 class PostView(ListView):
@@ -50,9 +51,17 @@ class PostView(ListView):
     def get_context_data(self, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['categories'] = list(Category.objects.all().values('id', 'name'))
+        categories_with_subcategories = []
+        categories = Category.objects.prefetch_related('subcategory_set').all()
+        for category in categories:
+            obj = {}
+            obj['category'] = category
+            obj['sub_categories'] = category.subcategory_set.all()
+            categories_with_subcategories.append(obj)
         context['sub_categories'] = list(SubCategory.objects.all().values('id', 'name'))
         context['filter'] = self.filterset_class
         context['post_type'] = self.request.path.split('/')[2]
+        context['cat_all'] = categories_with_subcategories
         return context
     
     def get_queryset(self):
@@ -73,11 +82,16 @@ class PostView(ListView):
 
 def send_sub_categories(request):
     category_id = request.GET.get('category_id', None)
+    for_filter = request.GET.get('filter', None)
+
     if category_id:
         sub_categories = SubCategory.objects.filter(category_id=category_id).order_by('name')
     else:
         sub_categories = SubCategory.objects.all().order_by('name')
-    template = Template('<option value="" selected>---------</option>{% for sub_category in sub_categories %}<option value="{{ sub_category.id }}">{{ sub_category.name }}</option>{% endfor %}')
+    if for_filter:
+        template = Template('{% for subcat in sub_categories %}<button class="subcat-name" name="sub_category" value="{{ subcat.id }}">{{ subcat.name }}</button>{% endfor %}')
+    else:
+        template = Template('<option value="" selected>---------</option>{% for sub_category in sub_categories %}<option value="{{ sub_category.id }}">{{ sub_category.name }}</option>{% endfor %}')
     return HttpResponse(template.render(RequestContext(request, { 'sub_categories': sub_categories })))
 
 @login_required
@@ -93,6 +107,7 @@ def add_post(request):
         form['sub_category_id'] = request.POST['sub_category']
         form['title'] = request.POST['title']
         form['description'] = request.POST['description']
+        form['date'] = request.POST['date']
         form['tags'] = request.POST['tags']
         form['video'] = request.POST['video']
         Post.objects.create(user=request.user, **form)

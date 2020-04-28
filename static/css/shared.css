@@ -122,6 +122,12 @@
           flex-direction: column;
 }
 
+.backdrop-form-div .backdrop-form-group input:focus,
+.backdrop-form-div .backdrop-form-group select:focus,
+.backdrop-form-div .backdrop-form-group textarea:focus {
+  outline-color: #00000044;
+}
+
 .backdrop-form-div .backdrop-form-group-buttons {
   width: 100%;
   display: -webkit-box;

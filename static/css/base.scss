@@ -1,3 +1,7 @@
+$breakpoint-sm: 576px;
+$accent-purple: #6f42c1;
+$dropdown-menu-border-color: #c4c4c470;
+$dropdown-menu-link-color-hover: #f1f1f1;
 $tile-hover-color-1: #6d24b3;
 $tile-hover-color-2: #2b22ad;
 
@@ -13,22 +17,28 @@ $tile-hover-color-2: #2b22ad;
     color: white;
     background: black;
     &:hover {
-        background: var(--purple);
+        background: $accent-purple;
     }
 }
 
-@mixin navbar-theme(
+@mixin navbar-theme (
     $nav-bg,
     $nav-link-color,
     $nav-link-color-hover,
     $nav-link-signup-font-color,
     $nav-link-signup-bg-color,
     $nav-link-signup-bg-color-hover,
-    $nav-link-signup-font-color-hover
+    $nav-link-signup-font-color-hover,
+    $collapse-li-bg-color,
+    $nav-dropdown-btn-font-color,
+    $nav-dropdown-bg-color,
+    $nav-dropdown-menu-link-font-color,
+    $nav-dropdown-menu-link-bg-color-hover
 ) {
     background: $nav-bg;
     justify-content: space-between;
     height: 55px;
+
     .nav-link {
         color: $nav-link-color;
         margin: 4px 0 0 1rem;
@@ -40,7 +50,7 @@ $tile-hover-color-2: #2b22ad;
     }
 
     .nav-link--signup {
-        @media screen and (min-width: 992px) {
+        @media screen and (min-width: $breakpoint-sm) {
             color: $nav-link-signup-font-color;
             margin-top: 0;
             padding: 2px 0 2px 0;
@@ -54,6 +64,70 @@ $tile-hover-color-2: #2b22ad;
                 background: $nav-link-signup-font-color-hover;
             }
         }
+    }
+
+    .collapse-li {
+        @media screen and (max-width: $breakpoint-sm - 1px) {
+            width: 100%;
+            background: $collapse-li-bg-color;
+            .nav-link {
+                padding: 2px 0 5px 0;
+            }
+        }
+    }
+
+    .nav-vendor-dropdown {
+        position: relative;
+        
+        &:hover {
+            .nav-dropdown-menu {
+                display: block;
+            }
+        }
+    
+        .nav-dropdown-btn {
+            background: transparent;
+            padding: 0;
+            color: $nav-dropdown-btn-font-color;
+            border: none;
+    
+            &:focus {
+                outline: none;
+            }
+    
+       
+            i {
+                padding-left: 8px;
+            }
+    
+        }
+        
+        .nav-dropdown-menu {
+            background: $nav-dropdown-bg-color;
+            display: none;
+            position: absolute;
+            width: 100%;
+            // padding: 5px;
+            border-radius: 5px;
+            border: 1px solid $dropdown-menu-border-color;
+        }
+        
+        .nav-dropdown-menu-link {
+            text-align: start;
+            // border-bottom: 1px thin black;
+            color: $nav-dropdown-menu-link-font-color;
+            display: block;
+            width: 100%;
+            padding: 5px 10px;
+    
+            &:hover {
+                text-decoration: none;
+                color: $accent-purple;
+                background: $nav-dropdown-menu-link-bg-color-hover;
+            }
+    
+        }
+    
     }
 }
 
@@ -76,19 +150,47 @@ body {
 }
 
 .navbar-custom-bg-dark {
-    @include navbar-theme(linear-gradient(#000, #0000), white, var(--purple), white, var(--purple, purple), black, white);
+    @include navbar-theme (
+        $nav-bg: linear-gradient(#000, #0000), 
+        $nav-link-color: white, 
+        $nav-link-color-hover: $accent-purple, 
+        $nav-link-signup-font-color: white, 
+        $nav-link-signup-bg-color: $accent-purple, 
+        $nav-link-signup-bg-color-hover: black, 
+        $nav-link-signup-font-color-hover: white,
+        $collapse-li-bg-color: #00000052,
+        $nav-dropdown-btn-font-color: white,
+        $nav-dropdown-bg-color: #00000060,
+        $nav-dropdown-menu-link-font-color: white,
+        $nav-dropdown-menu-link-bg-color-hover: none
+    );
 }
 
 .navbar-galaxyzpj {
-    @include navbar-theme(white, black, var(--purple), var(--purple), none, purple, none);
+    @include navbar-theme (
+        $nav-bg: white, 
+        $nav-link-color: black, 
+        $nav-link-color-hover: $accent-purple, 
+        $nav-link-signup-font-color: $accent-purple, 
+        $nav-link-signup-bg-color: none, 
+        $nav-link-signup-bg-color-hover: purple, 
+        $nav-link-signup-font-color-hover: none,
+        $collapse-li-bg-color: white,
+        $nav-dropdown-btn-font-color: black,
+        $nav-dropdown-bg-color: white,
+        $nav-dropdown-menu-link-font-color: black,
+        $nav-dropdown-menu-link-bg-color-hover: $dropdown-menu-link-color-hover
+    );
 }
 
 .navbar-brand {
-    color: var(--purple);
+    color: $accent-purple;
     font-weight: 700;
+
     &:hover {
         color: purple;
     }
+    
 }
 
 .navbar-collapse {
@@ -101,41 +203,36 @@ body {
     justify-content: flex-end;
 }
 
+.navbar-toggler,
+.navbar-toggler-collapsed {
+    padding: 5px 0;
+    border: 0;
+
+    &:focus {
+        outline: none;
+    }
+
+}
+
 #createPost {
     cursor: pointer;
     color: white;
     display: none;
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: $breakpoint-sm) {
         @include create-post-link;
         display: inline-block;
     }
-    &:hover {
-        // color: var(--purple);
-    }
 }
 
-.create-post-btn {
-    background: transparent;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    @media screen and (min-width: 992px) {
-        display: none;
-    }
-}
-
-#createPostCollapsed {
-    // @include create-post-link;
-    display: block;
-    margin: 0 5px;
-    background: url(/static/images/add-post.png);
-}
-
-
-
-.navbar-toggler {
-    padding: 0;
-}
+// #createPostCollapsed {
+//     @include create-post-link;
+//     display: none;
+//     margin: 0 5px;
+//     @media screen and (max-width: $breakpoint-sm - 1px) {
+//         @include create-post-link;
+//         display: inline-block;
+//     }
+// }
 
 .navbar-toggler-icon img { 
     height: 100%;

@@ -1,0 +1,41 @@
+<div class="sidebar">
+    <!-- <div class="sidebar-title">Filters</div> -->
+    <div class="post-type-filterbox">
+        <p class="post-type-filterbox--title">{% if request.path != '/user/dashboard/' %}Show results for{% else %}Post Type{% endif %}</p>
+        <ul class="post-type-filterbox--options">
+            
+            {% if request.path == '/user/dashboard/' %}
+            <li><button name="post_type" value=""><a href="?"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;All</a></button></li>
+            {% endif %}
+            {% if request.path != '/posts/video/' %}
+            <li><button name="post_type" value="video"><a href="{% if request.path != '/user/dashboard/' %}/posts/video{% else %}?type=video{% endif %}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;Video</a></button></li>    
+            {% endif %}
+            {% if request.path != '/posts/webinar/' %}
+            <li><button name="post_type" value="webinar"><a href="{% if request.path != '/user/dashboard/' %}/posts/webinar{% else %}?type=webinar{% endif %}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;Webinar</a></button></li>
+            {% endif %}
+            {% if request.path != '/posts/upcoming/' %}
+            <li><button name="post_type" value="upcoming"><a href="{% if request.path != '/user/dashboard/' %}/posts/upcoming{% else %}?type=upcoming{% endif %}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;Upcoming</a></button></li>
+            {% endif %}
+        </ul>
+    </div>
+    <form>
+        <div class="category-filterbox">
+            <p class="category-filterbox--title">Category</p>
+            <ul class="category-filterbox--options">
+                <li><button name="category" class="category-choices" value=""><i class="fas fa-angle-right"></i>&nbsp;&nbsp;All</button></li>
+                {% for category in categories %}
+                <li><button name="category" class="category-choices" value="{{ category.id }}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;{{ category.name }}</button></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- <div class="sub-category-filterbox">
+            <p class="sub-category-filterbox--title">Sub Category</p>
+            <ul class="sub-category-filterbox--options">
+                <li><button name="sub_category" value=""><i class="fas fa-angle-right"></i>&nbsp;&nbsp;All</button></li>
+                {% for sub_category in sub_categories %}
+                <li><button name="sub_category" value="{{ sub_category.id }}"><i class="fas fa-angle-right"></i>&nbsp;&nbsp;{{ sub_category.name }}</button></li>
+                {% endfor %}
+            </ul>
+        </div> -->
+    </form>
+</div>

@@ -85,6 +85,11 @@ $backdrop-background-color: #000000d0;
         padding: 8px;
         display: flex;
         flex-direction: column;
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline-color: #00000044;
+        }
     }
 
     .backdrop-form-group-buttons {

@@ -35,23 +35,79 @@ body {
 }
 
 .navbar-custom-bg-dark .nav-link:hover {
-  color: var(--purple);
+  color: #6f42c1;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 576px) {
   .navbar-custom-bg-dark .nav-link--signup {
     color: white;
     margin-top: 0;
     padding: 2px 0 2px 0;
     border: 2px solid white;
     border-radius: 8px;
-    background: var(--purple, purple);
+    background: #6f42c1;
     font-weight: bold;
   }
   .navbar-custom-bg-dark .nav-link--signup:hover {
     color: black;
     background: white;
   }
+}
+
+@media screen and (max-width: 575px) {
+  .navbar-custom-bg-dark .collapse-li {
+    width: 100%;
+    background: #00000052;
+  }
+  .navbar-custom-bg-dark .collapse-li .nav-link {
+    padding: 2px 0 5px 0;
+  }
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown {
+  position: relative;
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown:hover .nav-dropdown-menu {
+  display: block;
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown .nav-dropdown-btn {
+  background: transparent;
+  padding: 0;
+  color: white;
+  border: none;
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown .nav-dropdown-btn:focus {
+  outline: none;
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown .nav-dropdown-btn i {
+  padding-left: 8px;
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown .nav-dropdown-menu {
+  background: #00000060;
+  display: none;
+  position: absolute;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #c4c4c470;
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown .nav-dropdown-menu-link {
+  text-align: start;
+  color: white;
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.navbar-custom-bg-dark .nav-vendor-dropdown .nav-dropdown-menu-link:hover {
+  text-decoration: none;
+  color: #6f42c1;
+  background: none;
 }
 
 .navbar-galaxyzpj {
@@ -70,12 +126,12 @@ body {
 }
 
 .navbar-galaxyzpj .nav-link:hover {
-  color: var(--purple);
+  color: #6f42c1;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 576px) {
   .navbar-galaxyzpj .nav-link--signup {
-    color: var(--purple);
+    color: #6f42c1;
     margin-top: 0;
     padding: 2px 0 2px 0;
     border: 2px solid white;
@@ -89,8 +145,64 @@ body {
   }
 }
 
+@media screen and (max-width: 575px) {
+  .navbar-galaxyzpj .collapse-li {
+    width: 100%;
+    background: white;
+  }
+  .navbar-galaxyzpj .collapse-li .nav-link {
+    padding: 2px 0 5px 0;
+  }
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown {
+  position: relative;
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown:hover .nav-dropdown-menu {
+  display: block;
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown .nav-dropdown-btn {
+  background: transparent;
+  padding: 0;
+  color: black;
+  border: none;
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown .nav-dropdown-btn:focus {
+  outline: none;
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown .nav-dropdown-btn i {
+  padding-left: 8px;
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown .nav-dropdown-menu {
+  background: white;
+  display: none;
+  position: absolute;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #c4c4c470;
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown .nav-dropdown-menu-link {
+  text-align: start;
+  color: black;
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.navbar-galaxyzpj .nav-vendor-dropdown .nav-dropdown-menu-link:hover {
+  text-decoration: none;
+  color: #6f42c1;
+  background: #f1f1f1;
+}
+
 .navbar-brand {
-  color: var(--purple);
+  color: #6f42c1;
   font-weight: 700;
 }
 
@@ -117,13 +229,24 @@ body {
           justify-content: flex-end;
 }
 
+.navbar-toggler,
+.navbar-toggler-collapsed {
+  padding: 5px 0;
+  border: 0;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler-collapsed:focus {
+  outline: none;
+}
+
 #createPost {
   cursor: pointer;
   color: white;
   display: none;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 576px) {
   #createPost {
     margin-top: 0;
     padding: 2px 8px 2px 8px;
@@ -135,31 +258,8 @@ body {
     display: inline-block;
   }
   #createPost:hover {
-    background: var(--purple);
+    background: #6f42c1;
   }
-}
-
-.create-post-btn {
-  background: transparent;
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-@media screen and (min-width: 992px) {
-  .create-post-btn {
-    display: none;
-  }
-}
-
-#createPostCollapsed {
-  display: block;
-  margin: 0 5px;
-  background: url(/static/images/add-post.png);
-}
-
-.navbar-toggler {
-  padding: 0;
 }
 
 .navbar-toggler-icon img {

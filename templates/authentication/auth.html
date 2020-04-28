@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+<div class="auth-body{% if request.path == '/login/' %} auth-login-body{% endif %}">
+
+    {% if request.path == '/login/' %}
+
+    <form class="auth-form auth-login-form" action="{% url 'login' %}" method="POST">{% csrf_token %}
+        <h1 class="auth-form--title">Welcome</h1>
+        <h4 class="auth-form--context">Please login to continue</h4>
+        {% if form.errors %}
+        <p class="auth-form--error">Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        <div class="auth-form-group">
+            <label for="username" class="auth-form-group--label">Username</label>
+            <input type="text" class="auth-form-group--input" id="username" name="username" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="password" class="auth-form-group--label">Password</label>
+            <input type="password" class="auth-form-group--input" id="password" name="password" required>
+        </div>
+        <div class="auth-form--submit">
+            <button class="auth-form--submit-btn" type="submit">Login</button>
+        </div>
+    </form>
+
+    {% elif request.path == '/signup/' %}
+
+    <form class="auth-form" action="{% url 'signup' %}" method="POST">{% csrf_token %}
+        <h1 class="auth-form--title">Welcome</h1>
+        <h4 class="auth-form--context">Please register for an account</h4>
+        {% if form.errors %}
+        <p class="auth-form--error">Please check your credentials and try again.</p>
+        {% endif %}
+        <div class="auth-form-group">
+            <label for="firstName" class="auth-form-group--label">First Name</label>
+            {% if form.first_name.errors %}
+            {{ form.first_name.errors }}
+            {% endif %}
+            <input type="text" class="auth-form-group--input" id="firstName" name="first_name" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="lastName" class="auth-form-group--label">Last Name</label>
+            {% if form.last_name.errors %}
+            {{ form.last_name.errors }}
+            {% endif %}
+            <input type="text" class="auth-form-group--input" id="lastName" name="last_name" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="mobile" class="auth-form-group--label">Mobile</label>
+            {% if form.mobile.errors %}
+            {{ form.mobile.errors }}
+            {% endif %}
+            <input type="text" class="auth-form-group--input" id="mobile" name="mobile" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="email" class="auth-form-group--label">Email</label>
+            {% if form.email.errors %}
+            {{ form.email.errors }}
+            {% endif %}
+            <input type="email" class="auth-form-group--input" id="email" name="email" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="companyName" class="auth-form-group--label">Company Name</label>
+            {% if form.company_name.errors %}
+            {{ form.company_name.errors }}
+            {% endif %}
+            <input type="text" class="auth-form-group--input" id="companyName" name="company_name" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="companySize" class="auth-form-group--label">Company Size</label>
+            <select class="auth-form-group--input" name="company_size" id="companySize" required>
+                <option value="" selected>---------</option>>
+                <option value="1-10">1-10</option>
+                <option value="11-50">11-50</option>
+                <option value="51-200">51-200</option>
+                <option value="200+">200+</option>
+                {% if form.username.errors %}
+                {{ form.username.errors }}
+                {% endif %}
+            </select>
+        </div>
+        <div class="auth-form-group">
+            <label for="username" class="auth-form-group--label">Username</label>
+            {% if form.username.errors %}
+            {{ form.username.errors }}
+            {% endif %}
+            <input type="text" class="auth-form-group--input" id="username" name="username" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="password1" class="auth-form-group--label">Password</label>
+            {% if form.password1.errors %}
+            {{ form.password1.errors }}
+            {% endif %}
+            <input type="password" class="auth-form-group--input" id="password1" name="password1" required>
+        </div>
+        <div class="auth-form-group">
+            <label for="password2" class="auth-form-group--label">Password again</label>
+            {% if form.password2.errors %}
+            {{ form.password2.errors }}
+            {% endif %}
+            <input type="password" class="auth-form-group--input" id="password2" name="password2" required>
+        </div>
+
+        <div class="auth-form--submit">
+            <button class="auth-form--submit-btn" type="submit">Register</button>
+        </div>
+    </form>
+
+    {% endif %}
+
+</div>
+
+{% endblock content %}
