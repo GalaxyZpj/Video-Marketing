@@ -12,6 +12,11 @@
     <form class="auth-form auth-login-form" action="{% url 'login' %}" method="POST">{% csrf_token %}
         <h1 class="auth-form--title">Welcome</h1>
         <h4 class="auth-form--context">Please login to continue</h4>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="auth-notification">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
         {% if form.errors %}
         <p class="auth-form--error">Your username and password didn't match. Please try again.</p>
         {% endif %}

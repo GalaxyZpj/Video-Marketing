@@ -12,6 +12,9 @@ $toolbar-menu-bg-color: white;
 $toolbar-menu-border-color: #c4c4c470;
 $toolbar-menu-link-color-hover: #f1f1f1;
 
+$filter-dropdown-menu-position-top: calc(#{$navbar-height} + #{$toolbar-height} - 11px);
+$filter-dropdown-menu-breakpoint-position-top: calc(#{$navbar-height} + #{$toolbar-breakpoint-height} - 5px);
+
 // $sidebar-title-font-size: 1.3rem;
 // $sidebar-title-font-weight: 600;
 // $sidebar-seperator-line-color: rgba(183, 0, 255, 0.185);   //#d1d0d0;
@@ -58,15 +61,19 @@ $post-company-name-font-size: 0.8rem;
 // }
 
 @mixin filter-dropdown-container($menu-link-class, $display-type, $border-position) {
-    width: 10rem;
+    // width: 10rem;
+    width: max-content;
     height: 100%;
+    min-width: 150px;
+    max-width: calc(50vw - 20px);
     display: $display-type;
     flex-direction: column;
     overflow-y: scroll;
-    padding: 5px 0;
     border-#{$border-position}: 1px solid $toolbar-menu-border-color;
     #{$menu-link-class} {
-        background: transparent;
+        padding: 5px;
+        min-height: 37px;
+        cursor: pointer;
         border: 0;
         text-align: start;
         &:hover {
@@ -276,12 +283,16 @@ $post-company-name-font-size: 0.8rem;
         display: none;
         flex-direction: row-reverse;
         overflow: hidden;
-        height: 8rem;
+        max-height: 50vh;
         position: fixed;
-        top: calc(#{$navbar-height} + #{$toolbar-height} - 11px);
+        // top: calc(#{$navbar-height} + #{$toolbar-height} - 11px);
+        top: $filter-dropdown-menu-position-top;
         background: #ffffff;
         border: 1px solid $toolbar-menu-border-color;
         right: 5px;
+        @media screen and (max-width: $breakpoint-sm) {
+            top: $filter-dropdown-menu-breakpoint-position-top;
+        }
     }
 
 }
@@ -297,13 +308,13 @@ $post-company-name-font-size: 0.8rem;
 .sort-dropdown {
     position: relative;
     width: max-content;
+    max-width: 50vw;
     padding-left: 20px;
-    z-index: 1000000000000;
 
     &:hover {
         .sort-dropdown-menu {
-            display: block;
-            z-index: 1000000000000;
+            display: flex;
+            flex-direction: column;
         }
     }
 
@@ -318,21 +329,19 @@ $post-company-name-font-size: 0.8rem;
     
     .sort-dropdown-menu {
         display: none;
-        position: absolute;
+        position: fixed;
         background: white;
         border: 1px solid $toolbar-menu-border-color;
-        width: 170px;
-        left: -55px;
     }
     
     .sort-dropdown-menu-btn {
         // text-align: start;
-        background: transparent;
+        // background: transparent;
         // color: white;
-        border: 0;
-        margin: 0;
         padding: 5px;
-        width: 100%;
+        height: 37px;
+        cursor: pointer;
+        border: 0;
         text-align: start;
         // border: 1px solid #8b8a8a5d;
         // border-bottom: 1px solid #8b8a8a5d;

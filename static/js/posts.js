@@ -50,10 +50,11 @@ $(document).ready(function() {
 
     $(document).on('mouseenter', '.cat-name', function() {
         $('.subcat-container').empty();
-        let categoryId = $(this).val();
+        // let categoryId = $(this).val();
+        let categoryId = $(this).attr('value');
+        // console.log(categoryId);
         $.get('/sub_category/?filter=yes&category_id=' + categoryId, response => {
             $('.subcat-container').append(response);
-            // $('.subcat-container').show();
             let height = $('.filter-dropdown-menu').innerHeight()
             $('.subcat-container').css("height", height);
             $('.subcat-container').css('display', 'flex');
@@ -63,6 +64,19 @@ $(document).ready(function() {
     $(document).on('mouseleave', '.subcat-container', function() {
         $('.subcat-container').hide();
         $('.subcat-container').empty();
+    });
+
+    $(document).on('click', '.sort-dropdown-menu-btn', function() {
+        let sortByValue = $(this).attr('value');
+        $('#sortHiddenInput').attr('value', sortByValue);
+        console.log($('#sortHiddenInput').attr('value'));
+        $('#toolbar-form').submit();
+    });
+
+    $(document).on('click', '.subcat-name', function() {
+        let subCategoryValue = $(this).attr('value');
+        $('#subcategoryHiddenInput').attr('value', subCategoryValue);
+        $('#toolbar-form').submit();
     });
 
 });

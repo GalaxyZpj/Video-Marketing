@@ -1,5 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, QuerySet
@@ -36,7 +37,7 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            request.user.message_set.create(message="Registration successful. Please login with your credentials")
+            messages.add_message(request, messages.SUCCESS, "Registration successful. Please login to continue.")
             return redirect(reverse('login'))
     return render(request, 'authentication/auth.html', { 'form': form })
 
@@ -50,34 +51,31 @@ class PostView(ListView):
 
     def get_context_data(self, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        context['categories'] = list(Category.objects.all().values('id', 'name'))
-        categories_with_subcategories = []
-        categories = Category.objects.prefetch_related('subcategory_set').all()
-        for category in categories:
-            obj = {}
-            obj['category'] = category
-            obj['sub_categories'] = category.subcategory_set.all()
-            categories_with_subcategories.append(obj)
-        context['sub_categories'] = list(SubCategory.objects.all().values('id', 'name'))
+        context['cat_all'] = Category.objects.all().order_by('name')
+        # categories_with_subcategories = []
+        # categories = Category.objects.prefetch_related('subcategory_set').all()
+        # for category in categories:
+        #     obj = {}
+        #     obj['category'] = category
+        #     obj['sub_categories'] = category.subcategory_set.all()
+        #     categories_with_subcategories.append(obj)
+        # context['sub_categories'] = list(SubCategory.objects.all().values('id', 'name'))
+        # context['cat_all'] = categories_with_subcategories
         context['filter'] = self.filterset_class
         context['post_type'] = self.request.path.split('/')[2]
-        context['cat_all'] = categories_with_subcategories
         return context
     
     def get_queryset(self):
         post_types = ['webinar', 'video', 'upcoming']
         filter_data = {}
         if self.request.user.is_authenticated and self.request.path == reverse('dashboard'):
-            print('\n\n', 'DASHBOARD')
             filter_data['user_id'] = self.request.user.id
             if self.request.GET.get('type', None) != None:
                 filter_data['type'] = self.request.GET.get('type')
         else:
-            print('\n\n', 'NOT DASHBOARD')
             filter_data['type'] = self.request.path.split('/')[2]
             if filter_data['type'] not in post_types:
                 return Post.objects.none()
-        print('\n\n', filter_data)
         return self.filterset_class(self.request.GET, queryset=Post.objects.filter(**filter_data).order_by('-created')).qs.distinct()
 
 def send_sub_categories(request):
@@ -89,7 +87,7 @@ def send_sub_categories(request):
     else:
         sub_categories = SubCategory.objects.all().order_by('name')
     if for_filter:
-        template = Template('{% for subcat in sub_categories %}<button class="subcat-name" name="sub_category" value="{{ subcat.id }}">{{ subcat.name }}</button>{% endfor %}')
+        template = Template('{% for subcat in sub_categories %}<a class="subcat-name" value="{{ subcat.id }}">{{ subcat.name }}</a>{% endfor %}')
     else:
         template = Template('<option value="" selected>---------</option>{% for sub_category in sub_categories %}<option value="{{ sub_category.id }}">{{ sub_category.name }}</option>{% endfor %}')
     return HttpResponse(template.render(RequestContext(request, { 'sub_categories': sub_categories })))

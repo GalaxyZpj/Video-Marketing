@@ -7,7 +7,7 @@ from core.models import Post
 class UserForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'mobile', 'email', 'username', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'mobile', 'email', 'company_name', 'company_size', 'username', 'password1', 'password2']
 
 
 class PostForm(ModelForm):

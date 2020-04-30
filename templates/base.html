@@ -33,7 +33,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}" id="login">Login</a>
           </li>
-          {% else %}
+          {% elif request.path == '/' %}
           <li class="nav-item nav-vendor-dropdown">
             <button class="nav-dropdown-btn">Vendor<i class="fas fa-caret-down"></i></button>
             <div class="nav-dropdown-menu">

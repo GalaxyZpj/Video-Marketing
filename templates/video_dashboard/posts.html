@@ -12,7 +12,10 @@
     <!-- SIDEBAR TO BE INSERTED HERE IF ANY -->
 
     <div class="post-main">
-        <form class="toolbar">
+        <form class="toolbar" id="toolbar-form">
+
+            <input type="hidden" name="sort_by" value="" id="sortHiddenInput">
+            <input type="hidden" name="sub_category" value="{{ request.GET.sub_category }}" id="subcategoryHiddenInput">
 
             <div class="search-bar-group">
                 <input class="search-bar" type="text" name="search" placeholder="Search" value="{{ request.GET.search }}">
@@ -30,12 +33,16 @@
                 <div class="sort-dropdown">
                     <button class="sort-dropdown-btn">Sort by</button><i class="fas fa-caret-down"></i>
                     <div class="sort-dropdown-menu">
-                        <button class="sort-dropdown-menu-btn" name="sort_by" value="latest">Recently uploaded</button>
-                        <button class="sort-dropdown-menu-btn" name="sort_by" value="oldest">Oldest first</button>
-                        <button class="sort-dropdown-menu-btn" name="date" value="latest">Date</button>
-                        <button class="sort-dropdown-menu-btn" name="date" value="oldest">Date</button>
-                        <!-- <button name="sort_by" value="">Title (A-Z)</button>
-                        <button name="sort_by" value="">Title (Z-A)</button> -->
+                        <a class="sort-dropdown-menu-btn" value="-created">Recently uploaded</a>
+                        <a class="sort-dropdown-menu-btn" value="created">Oldest first</a>
+                        <a class="sort-dropdown-menu-btn" value="title">Title (A-Z)</a>
+                        <a class="sort-dropdown-menu-btn" value="-title">Title (Z-A)</a>
+                        {% if request.path == '/posts/upcoming/' %}
+                        <a class="sort-dropdown-menu-btn" value="date">Upclose</a>
+                        <a class="sort-dropdown-menu-btn" value="-date">Later Future</a>
+                        <a class="sort-dropdown-menu-btn" value="past">Past Webinars (ASC)</a>
+                        <a class="sort-dropdown-menu-btn" value="-past">Past Webinars (DEC)</a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -44,14 +51,10 @@
                     <div class="filter-dropdown-menu">
                         <div class="cat-container">
                             {% for cat in cat_all %}
-                            <button class="cat-name" name="category" value="{{ cat.category.id }}">{{ cat.category.name }}</button>
+                            <a class="cat-name" value="{{ cat.id }}">{{ cat.name }}</a>
                             {% endfor %}
                         </div>
-                        <div class="subcat-container">
-                            {% for subcat in cat.sub_categories %}
-                            <button class="subcat-name" name="sub_category" value="{{ subcat.id }}">{{ subcat.name }}</button>
-                            {% endfor %}
-                        </div>
+                        <div class="subcat-container"></div>
                     </div>
                 </div>
 
@@ -65,7 +68,7 @@
                 <div class="post-container" post_id="{{ post.id }}">
                     <iframe src="{{ post.video }}" frameborder="0" allowfullscreen></iframe>
                     <p class="post-title">{{ post.title }}</p>
-                    <p class="post-company">@{{ post.user.company_name }}</p>
+                    <p class="post-company">@{{ post.user.company_name }}{% if request.path == '/posts/upcoming/' %} | {{ post.date }}{% endif %}</p>
                 </div>
                 {% endfor %}
             </div>
@@ -74,14 +77,14 @@
         <div class="paginator">
             {% if page_obj.has_previous %}
             <a class="paginator-previous" href="?{% param_replace page=page_obj.previous_page_number %}"><p><i class="fas fa-angle-double-left"></i></p></a>
-            {% endif %} 
+            {% endif %}
 
             {% if is_paginated %}
             <p class="paginator-pages">{{ paginator.count }} results | Page {{ page_obj.number }} of {{ paginator.num_pages }}</p>
             {% else %}
             <p class="paginator-pages">{{ paginator.count }} results</p>
             {% endif %}
-    
+
             {% if page_obj.has_next %}
             <a class="paginator-next" href="?{% param_replace page=page_obj.next_page_number %}"><p><i class="fas fa-angle-double-right"></i></p></a>
             {% endif %}
