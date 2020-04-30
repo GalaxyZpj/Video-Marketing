@@ -107,7 +107,8 @@ $tile-hover-color-2: #372be2;
     p {
         margin: 0;
         padding-top: 24px;
-        font-size: 2rem;
+        font-size: 1.2rem;
+        text-align: center;
         @media screen and (max-width: 768px) {
             font-size: 1.6rem;
             height: 100%;
@@ -119,10 +120,12 @@ $tile-hover-color-2: #372be2;
     &:hover {
         text-decoration: none;
         color: black;
-        p {
-            transform: scale(1.15);
-            transition: transform 200ms ease-out
-        }
+        box-shadow: 0 0 20px rgba(128, 0, 128, 0.705);
+        transition: box-shadow 200ms ease-out;
+        // p {
+        //     transform: scale(1.15);
+        //     transition: transform 200ms ease-out
+        // }
         // img {
         //     transform: translateY(-0.5rem);
         //     transition: transform 300ms ease-out;
