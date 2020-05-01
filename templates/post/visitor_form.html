@@ -1,0 +1,33 @@
+<div class="backdrop-form-div">
+    <div class="backdrop-close" id="backdrop-close">X</div>
+    <form class="backdrop-form" id="visitorForm">{% csrf_token %}
+        
+        <input type="hidden" name="company_agent" id="companyAgent" value="{{ post.user.id }}">
+        <input type="hidden" name="post_id" id="postId" value="{{ post.id }}">
+
+        <h3 class="backdrop-form--title">Watch content from {{ post.user.company_name|upper }}</h3>
+        <div class="backdrop-form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" name="first_name" id="visitorFirstName" required>
+        </div>
+        <div class="backdrop-form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" name="last_name" id="visitorLastName" required>
+        </div>
+        <div class="backdrop-form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="visitorEmail" required>
+        </div>
+        <div class="backdrop-form-group">
+            <label for="Mobile">Mobile</label>
+            <input type="number" pattern="\d{3}[\-]\d{3}[\-]\d{4}" name="mobile" id="visitorMobile" required>
+        </div>
+        <div class="backdrop-form-checkbox">
+            <input type="checkbox" required>&nbsp;I agree that {{ post.user.company_name }} may contact me reguarding my request.
+        </div>
+        <div class="backdrop-form-group-buttons">
+            <button class="backdrop-close backdrop-form--cancel">Cancel</button>
+            <button class="backdrop-form--watch" name="watch" type="submit" id="watch">Watch</button>
+        </div>
+    </form>
+</div>

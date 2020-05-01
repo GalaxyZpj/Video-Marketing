@@ -98,7 +98,8 @@
 .tile p {
   margin: 0;
   padding-top: 24px;
-  font-size: 2rem;
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -112,15 +113,12 @@
 .tile:hover {
   text-decoration: none;
   color: black;
-}
-
-.tile:hover p {
-  -webkit-transform: scale(1.15);
-          transform: scale(1.15);
-  -webkit-transition: -webkit-transform 200ms ease-out;
-  transition: -webkit-transform 200ms ease-out;
-  transition: transform 200ms ease-out;
-  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out;
+  -webkit-box-shadow: 0 0 20px rgba(128, 0, 128, 0.705);
+          box-shadow: 0 0 20px rgba(128, 0, 128, 0.705);
+  -webkit-transition: -webkit-box-shadow 200ms ease-out;
+  transition: -webkit-box-shadow 200ms ease-out;
+  transition: box-shadow 200ms ease-out;
+  transition: box-shadow 200ms ease-out, -webkit-box-shadow 200ms ease-out;
 }
 
 .tile img {

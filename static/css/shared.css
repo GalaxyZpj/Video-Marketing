@@ -2,7 +2,7 @@
   position: fixed;
   height: 100vh;
   width: 100vw;
-  z-index: 999999;
+  z-index: 10000;
   background: #000000d0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -31,11 +31,21 @@
   cursor: pointer;
 }
 
+.backdrop-form-scroll {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
 .backdrop-form-div {
-  max-height: 95vh;
-  overflow-y: auto;
-  -ms-flex-preferred-size: 60%;
-      flex-basis: 60%;
+  position: relative;
+  height: 80%;
+  overflow: hidden;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,12 +95,14 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  overflow-y: scroll;
+}
+
+.backdrop-form-div .backdrop-form::-webkit-scrollbar {
+  display: none;
 }
 
 .backdrop-form-div .backdrop-form--title {
@@ -108,6 +120,24 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.backdrop-form-div .backdrop-form-group input:focus,
+.backdrop-form-div .backdrop-form-group select:focus,
+.backdrop-form-div .backdrop-form-group textarea:focus {
+  outline-color: #00000044;
+}
+
+.backdrop-form-div .backdrop-form-checkbox {
+  padding: 5px 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.backdrop-form-div .backdrop-form-checkbox input {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
 }
 
 .backdrop-form-div .backdrop-form-group-buttons {
@@ -129,10 +159,14 @@
 }
 
 .backdrop-form-div .backdrop-form--submit {
-  background-color: var(--success);
+  background-color: #28a745;
 }
 
 .backdrop-form-div .backdrop-form--cancel {
-  background-color: var(--danger);
+  background-color: #dc3545;
+}
+
+.backdrop-form-div .backdrop-form--watch {
+  background-color: #007bff;
 }
 /*# sourceMappingURL=shared.css.map */

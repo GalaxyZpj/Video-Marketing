@@ -5,58 +5,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>
+      {% if post_type %}
+      Posts | {{ post_type|title }}
+      {% else %}
+      Home
+      {% endif %}
+    </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/shared.css' %}">
 </head>
 <body>
     <!-- Navbar Start -->
-    <nav class="navbar fixed-top navbar-custom-bg-dark navbar-expand-lg">
+    <!-- or request.path == '/login/' or request.path == '/signup/' -->
+      <nav class="navbar fixed-top navbar-expand-sm {% if request.path == '/' %}navbar-custom-bg-dark{% else %}navbar-galaxyzpj{% endif %}">
         <a class="navbar-brand" href="{% url 'home' %}">LOGO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"><img src="{% static 'images/menu.png' %}" alt=""></span>
-        </button>
+        
+        <!-- if request.path == '/' and not user.is_authenticated -->
+        {% if not user.is_authenticated %}
+        <ul class="navbar-nav">
+          {% if request.path == '/login/' %}
+          <li class="nav-item">
+            <a class="nav-link nav-link--signup" href="{% url 'signup' %}" id="signup">Signup</a>
+          </li>
+          {% elif request.path == '/signup/' %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}" id="login">Login</a>
+          </li>
+          {% elif request.path == '/' %}
+          <li class="nav-item nav-vendor-dropdown">
+            <button class="nav-dropdown-btn">Vendor<i class="fas fa-caret-down"></i></button>
+            <div class="nav-dropdown-menu">
+              <a class="nav-dropdown-menu-link" href="{% url 'login' %}?next={{ request.path }}" id="login">Login</a>
+              <a class="nav-dropdown-menu-link" href="{% url 'signup' %}" id="signup">Signup</a>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+        {% endif %}
+        
+        {% if user.is_authenticated %}
+        <div class="nav-collapse-btn-group">
+          <!-- <a class="nav-link" id="createPostCollapsed">Create Post</a> -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><img src="{% static 'images/menu.png' %}" alt=""></span>
+          </button>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
-            </li>
             
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'dashboard' %}">{{ user }}</a>
+            {% if request.path != '/user/dashboard/' %}
+            <li class="nav-item collapse-li">
+              <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
             </li>
-            <li class="nav-item">
+            {% endif %}
+
+            <li class="nav-item collapse-li">
               <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
-            {% else %}
-            {% if request.path != '/login/' %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}" id="login">Login</a>
+
+            <li>
+              <a class="nav-link" id="createPost">Create Post</a>
             </li>
-            {% endif %}
-            <li class="nav-item">
-              <a class="nav-link nav-link--signup" href="{% url 'signup' %}" id="signup">Signup</a>
-            </li>
-            {% endif %}
-              
+
           </ul>
         </div>
+        {% endif %}
+
       </nav>
     <!-- Navbar End -->
     <div class="backdrop"></div>
-    <div class="container-fluid">
-      {% block content %}
-      {% endblock content %}
-    </div>
+    {% block content %}
+    {% endblock content %}
 </body>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="{% static 'js/index.js' %}"></script>
+<script src="https://kit.fontawesome.com/fa0ed5f5d1.js" crossorigin="anonymous"></script>
 <script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/posts.js' %}"></script>
+
 </html>

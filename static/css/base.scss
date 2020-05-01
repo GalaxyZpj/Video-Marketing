@@ -1,7 +1,135 @@
+$breakpoint-sm: 576px;
+$accent-purple: #6f42c1;
+$dropdown-menu-border-color: #c4c4c470;
+$dropdown-menu-link-color-hover: #f1f1f1;
 $tile-hover-color-1: #6d24b3;
 $tile-hover-color-2: #2b22ad;
 
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400;500;600;700;800&display=swap');
+
+@mixin create-post-link {
+    // color: white;
+    margin-top: 0;
+    padding: 2px 8px 2px 8px;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-weight: 700;
+    color: white;
+    background: black;
+    &:hover {
+        background: $accent-purple;
+    }
+}
+
+@mixin navbar-theme (
+    $nav-bg,
+    $nav-link-color,
+    $nav-link-color-hover,
+    $nav-link-signup-font-color,
+    $nav-link-signup-bg-color,
+    $nav-link-signup-bg-color-hover,
+    $nav-link-signup-font-color-hover,
+    $collapse-li-bg-color,
+    $nav-dropdown-btn-font-color,
+    $nav-dropdown-bg-color,
+    $nav-dropdown-menu-link-font-color,
+    $nav-dropdown-menu-link-bg-color-hover
+) {
+    background: $nav-bg;
+    justify-content: space-between;
+    height: 55px;
+
+    .nav-link {
+        color: $nav-link-color;
+        margin: 4px 0 0 1rem;
+        padding: 0;
+        display: inline-block;
+        &:hover {
+            color: $nav-link-color-hover;
+        }
+    }
+
+    .nav-link--signup {
+        @media screen and (min-width: $breakpoint-sm) {
+            color: $nav-link-signup-font-color;
+            margin-top: 0;
+            padding: 2px 0 2px 0;
+            border: 2px solid white;
+            border-radius: 8px;
+            background: $nav-link-signup-bg-color;
+            font-weight: bold;
+    
+            &:hover {
+                color: $nav-link-signup-bg-color-hover;
+                background: $nav-link-signup-font-color-hover;
+            }
+        }
+    }
+
+    .collapse-li {
+        @media screen and (max-width: $breakpoint-sm - 1px) {
+            width: 100%;
+            background: $collapse-li-bg-color;
+            .nav-link {
+                padding: 2px 0 5px 0;
+            }
+        }
+    }
+
+    .nav-vendor-dropdown {
+        position: relative;
+        
+        &:hover {
+            .nav-dropdown-menu {
+                display: block;
+            }
+        }
+    
+        .nav-dropdown-btn {
+            background: transparent;
+            padding: 0;
+            color: $nav-dropdown-btn-font-color;
+            border: none;
+    
+            &:focus {
+                outline: none;
+            }
+    
+       
+            i {
+                padding-left: 8px;
+            }
+    
+        }
+        
+        .nav-dropdown-menu {
+            background: $nav-dropdown-bg-color;
+            display: none;
+            position: absolute;
+            width: 100%;
+            // padding: 5px;
+            border-radius: 5px;
+            border: 1px solid $dropdown-menu-border-color;
+        }
+        
+        .nav-dropdown-menu-link {
+            text-align: start;
+            // border-bottom: 1px thin black;
+            color: $nav-dropdown-menu-link-font-color;
+            display: block;
+            width: 100%;
+            padding: 5px 10px;
+    
+            &:hover {
+                text-decoration: none;
+                color: $accent-purple;
+                background: $nav-dropdown-menu-link-bg-color-hover;
+            }
+    
+        }
+    
+    }
+}
 
 * {
     box-sizing: border-box;
@@ -18,21 +146,51 @@ body {
     height: 100vh !important;
     width: 100vw !important;
     margin: 0;
-    // background: url(/static/images/background2.jpg) no-repeat;
-    // background: #f5f5f5;
-    // background: linear-gradient(#892be2, #372be2);
     background-size: cover;
-    // backdrop-filter: blur(5px) !important;
-}
-
-.container-fluid {
-    padding: 0;
 }
 
 .navbar-custom-bg-dark {
-    background: linear-gradient(#000, #0000);
-    justify-content: space-between;
+    @include navbar-theme (
+        $nav-bg: linear-gradient(#000, #0000), 
+        $nav-link-color: white, 
+        $nav-link-color-hover: $accent-purple, 
+        $nav-link-signup-font-color: white, 
+        $nav-link-signup-bg-color: $accent-purple, 
+        $nav-link-signup-bg-color-hover: black, 
+        $nav-link-signup-font-color-hover: white,
+        $collapse-li-bg-color: #00000052,
+        $nav-dropdown-btn-font-color: white,
+        $nav-dropdown-bg-color: #00000060,
+        $nav-dropdown-menu-link-font-color: white,
+        $nav-dropdown-menu-link-bg-color-hover: none
+    );
+}
 
+.navbar-galaxyzpj {
+    @include navbar-theme (
+        $nav-bg: white, 
+        $nav-link-color: black, 
+        $nav-link-color-hover: $accent-purple, 
+        $nav-link-signup-font-color: $accent-purple, 
+        $nav-link-signup-bg-color: none, 
+        $nav-link-signup-bg-color-hover: purple, 
+        $nav-link-signup-font-color-hover: none,
+        $collapse-li-bg-color: white,
+        $nav-dropdown-btn-font-color: black,
+        $nav-dropdown-bg-color: white,
+        $nav-dropdown-menu-link-font-color: black,
+        $nav-dropdown-menu-link-bg-color-hover: $dropdown-menu-link-color-hover
+    );
+}
+
+.navbar-brand {
+    color: $accent-purple;
+    font-weight: 700;
+
+    &:hover {
+        color: purple;
+    }
+    
 }
 
 .navbar-collapse {
@@ -40,48 +198,43 @@ body {
     align-items: center;
 }
 
-.nav-link {
-    color: white;
-    margin: 4px 0 0 1rem;
-    padding: 0;
-    display: inline-block;
-    &:hover {
-        color: var(--purple);
-    }
+.nav-collapse-btn-group {
+    display: flex;
+    justify-content: flex-end;
 }
 
-#login {
-    color: white;
+.navbar-toggler,
+.navbar-toggler-collapsed {
+    padding: 5px 0;
+    border: 0;
+
+    &:focus {
+        outline: none;
+    }
+
+}
+
+#createPost {
     cursor: pointer;
-    &:hover {
-        color: var(--purple);
+    color: white;
+    display: none;
+    @media screen and (min-width: $breakpoint-sm) {
+        @include create-post-link;
+        display: inline-block;
     }
 }
 
-.nav-link--signup {
-    @media screen and (min-width: 992px) {
-        margin-top: 0;
-        padding: 2px 0 2px 0;
-        border: 2px solid white;
-        border-radius: 8px;
-        background: var(--purple, purple);
-        font-weight: bold;
-
-        &:hover {
-            color: black;
-            background: white;
-        }
-    }
-}
-
-.navbar-toggler {
-    // background: url(/static/images/menu.png);
-    
-}
+// #createPostCollapsed {
+//     @include create-post-link;
+//     display: none;
+//     margin: 0 5px;
+//     @media screen and (max-width: $breakpoint-sm - 1px) {
+//         @include create-post-link;
+//         display: inline-block;
+//     }
+// }
 
 .navbar-toggler-icon img { 
-    // background: url(/static/images/menu.png);
-    // background-color: red;
     height: 100%;
     width: 100%;
 }
