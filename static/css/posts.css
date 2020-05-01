@@ -479,4 +479,47 @@
 .paginator .paginator-next p:hover {
   color: #6f42c1;
 }
+
+.video-player-div {
+  height: 90%;
+  width: 80%;
+}
+
+.video-player {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: white;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.video-player .video-context {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.video-player .video-context p {
+  margin: 0;
+  text-overflow: ellipsis;
+}
+
+.video-player .video-context .video-title {
+  font-size: 1.5rem;
+}
+
+.video-player .video-context .video-company {
+  font-size: 1rem;
+}
+
+.video-player iframe {
+  width: 100%;
+  height: 80%;
+}
 /*# sourceMappingURL=posts.css.map */

@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from embed_video.fields import EmbedVideoField
 from django.contrib.auth.models import AbstractUser
 
 
@@ -65,3 +64,14 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.user.username} ({self.pk})"
+
+
+class Visitor(models.Model):
+    company_agent = models.ForeignKey(get_user_model(), related_name="visitors", on_delete=models.CASCADE, blank=False)
+    first_name = models.CharField("First Name", max_length=64, blank=False)
+    last_name = models.CharField("Last Name", max_length=64, blank=False)
+    email = models.EmailField("Email", blank=False)
+    mobile = models.CharField("Mobile", max_length=16, blank=False)
+
+    def __str__(self):
+        return self.email

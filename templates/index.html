@@ -10,7 +10,6 @@
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-          <!-- <li data-target="#carouselExampleCaptions" data-slide-to="2"></li> -->
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -29,13 +28,6 @@
               <p>“Challenges are what make life interesting and overcoming them is what makes life meaningful.”</p>
             </div>
           </div>
-          <!-- <div class="carousel-item">
-            <img src="{% static 'images/carousel-3.jpg' %}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-            </div>
-          </div> -->
         </div>
         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -51,7 +43,7 @@
   <!-- Carousal Ends -->
   
   <!-- Tiles Starts -->
-  <!-- <section> -->
+  
   <div class="tiles">
     <div class="tile-container tile-container-1">
       
@@ -75,21 +67,10 @@
       </a>
     </div>
   </div>
-    <!-- <div class="tile-text">
-      <p class="tile-text">Upcoming</p>
-      <p class="tile-text">Webinar</p>
-      <p class="tile-text">Videos</p>
-    </div> -->
-  <!-- </section> -->
+
   <!-- Tiles Ends -->
 </div>
 <script src="{% static 'js/jquery.js' %}"></script>
-<script src="{% static 'js/snap-scroll.js' %}"></script>
-<script>
-  // $('.carousel', 'section').SnapScroll({
-  //   animateDuration:750
-  // });
-</script>
 <script>
   function changeImages(x) {
     if (x.matches) { // If media query matches
@@ -103,7 +84,7 @@
 
   var scr = window.matchMedia("(max-width: 768px)");
   changeImages(scr);
-  scr.addEventListener(changeImages);
+  // scr.addEventListener(changeImages);
   
 </script>
 {% endblock content %}

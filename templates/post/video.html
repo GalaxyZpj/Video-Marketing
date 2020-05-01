@@ -1,16 +1,10 @@
 <div class="video-player-div">
     <div class="backdrop-close" id="backdrop-close" style="color: white; float: right;">X</div>
     <div class="video-player">
-        <p>Title: {{ post.title }}</p><br>
+        <div class="video-context">
+            <p class="video-title">{{ post.title }}</p><br>
+            <p class="video-company">By: {{ post.user.company_name }}</p>
+        </div>
         <iframe src="{{ post.video }}" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
-
-<script>
-
-    $('.backdrop-close').click(function() {
-        $('.backdrop').css('visibility', 'hidden');
-        $('.backdrop').empty();
-    });
-    
-</script>

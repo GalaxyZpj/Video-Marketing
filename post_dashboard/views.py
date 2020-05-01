@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q, QuerySet
 from django.views.generic import ListView
 from django.template import Template, RequestContext
 from django.http import HttpResponse
@@ -15,20 +14,6 @@ from .filters import PostFilter
 
 class Login(LoginView):
     pass
-    # def get_success_url(self):
-    #     # return super().get_success_url()
-    #     # return self.get_redirect_url()
-    #     return self.request.POST['next']
-    # def dispatch(self, request, *args, **kwargs):
-    #     if self.redirect_authenticated_user and self.request.user.is_authenticated:
-    #         redirect_to = self.get_success_url()
-    #         if redirect_to == self.request.path:
-    #             raise ValueError(
-    #                 "Redirection loop for authenticated user detected. Check that "
-    #                 "your LOGIN_REDIRECT_URL doesn't point to a login page."
-    #             )
-    #         return HttpResponseRedirect(redirect_to)
-    #     return super().dispatch(request, *args, **kwargs)
 
 def signup(request):
     if request.method == 'GET':
@@ -45,22 +30,13 @@ def signup(request):
 class PostView(ListView):
     model = Post
     paginate_by = 12
-    template_name = 'video_dashboard/posts.html'
+    template_name = 'post/posts.html'
     context_object_name = 'posts'
     filterset_class = PostFilter
 
     def get_context_data(self, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['cat_all'] = Category.objects.all().order_by('name')
-        # categories_with_subcategories = []
-        # categories = Category.objects.prefetch_related('subcategory_set').all()
-        # for category in categories:
-        #     obj = {}
-        #     obj['category'] = category
-        #     obj['sub_categories'] = category.subcategory_set.all()
-        #     categories_with_subcategories.append(obj)
-        # context['sub_categories'] = list(SubCategory.objects.all().values('id', 'name'))
-        # context['cat_all'] = categories_with_subcategories
         context['filter'] = self.filterset_class
         context['post_type'] = self.request.path.split('/')[2]
         return context
@@ -78,7 +54,7 @@ class PostView(ListView):
                 return Post.objects.none()
         return self.filterset_class(self.request.GET, queryset=Post.objects.filter(**filter_data).order_by('-created')).qs.distinct()
 
-def send_sub_categories(request):
+def send_sub_categories_ajax(request):
     category_id = request.GET.get('category_id', None)
     for_filter = request.GET.get('filter', None)
 
@@ -93,25 +69,36 @@ def send_sub_categories(request):
     return HttpResponse(template.render(RequestContext(request, { 'sub_categories': sub_categories })))
 
 @login_required
-def add_post(request):
+def add_post_ajax(request):
     if request.method == 'GET':
         categories = Category.objects.all().order_by('name')
-        return render(request, 'video_dashboard/add_post.html', { 'categories': categories })
+        return render(request, 'post/add_post.html', { 'categories': categories })
     elif request.method == 'POST':
-        form = {}
-        print('\n\n', request.POST)
-        form['type'] = request.POST['type']
-        form['category_id'] = request.POST['category']
-        form['sub_category_id'] = request.POST['sub_category']
-        form['title'] = request.POST['title']
-        form['description'] = request.POST['description']
-        form['date'] = request.POST['date']
-        form['tags'] = request.POST['tags']
-        form['video'] = request.POST['video']
-        Post.objects.create(user=request.user, **form)
-        posts = Post.objects.filter(user=request.user).order_by('-created')
+        form_data = {
+            'type': request.POST['type'],
+            'category_id': request.POST['category'],
+            'sub_category_id': request.POST['sub_category'],
+            'title': request.POST['title'],
+            'description': request.POST['description'],
+            'date': request.POST['date'],
+            'tags': request.POST['tags'],
+            'video': request.POST['video'],
+        }
+        Post.objects.create(user=request.user, **form_data)
         return redirect(reverse('dashboard'))
 
-def play_video(request, video_id):
-    video = Post.objects.get(pk=video_id)
-    return render(request, 'video_dashboard/video.html', { 'post': video })
+def visitor_form_ajax(request, post_id):
+    if request.method == 'POST':
+        formData = {
+            'company_agent': get_user_model().objects.get(id=request.POST['company_agent']),
+            'first_name': request.POST['first_name'],
+            'last_name': request.POST['last_name'],
+            'email': request.POST['email'],
+            'mobile': request.POST['mobile'],
+        }
+        Visitor.objects.create(**formData)
+        video = Post.objects.get(pk=post_id)
+        return render(request, 'post/video.html', { 'post': video })
+    return render(request, 'post/visitor_form.html', {
+        'post': Post.objects.get(id=post_id),
+    })

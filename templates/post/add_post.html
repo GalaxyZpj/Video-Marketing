@@ -1,6 +1,5 @@
 <div class="backdrop-form-div">
     <div class="backdrop-close" id="backdrop-close">X</div>
-    <!-- <button class="backdrop-form-scroll"><a href="#tags">S</a></button> -->
     <h1 class="backdrop-form--title">Add Post</h1>
     <form class="backdrop-form" action="{% url 'addPost' %}" method="POST">
         {% csrf_token %}

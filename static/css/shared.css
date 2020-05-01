@@ -128,6 +128,18 @@
   outline-color: #00000044;
 }
 
+.backdrop-form-div .backdrop-form-checkbox {
+  padding: 5px 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.backdrop-form-div .backdrop-form-checkbox input {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
 .backdrop-form-div .backdrop-form-group-buttons {
   width: 100%;
   display: -webkit-box;
@@ -147,10 +159,14 @@
 }
 
 .backdrop-form-div .backdrop-form--submit {
-  background-color: var(--success);
+  background-color: #28a745;
 }
 
 .backdrop-form-div .backdrop-form--cancel {
-  background-color: var(--danger);
+  background-color: #dc3545;
+}
+
+.backdrop-form-div .backdrop-form--watch {
+  background-color: #007bff;
 }
 /*# sourceMappingURL=shared.css.map */

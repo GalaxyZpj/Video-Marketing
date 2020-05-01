@@ -1,4 +1,7 @@
 $backdrop-background-color: #000000d0;
+$primary: #007bff;
+$success: #28a745;
+$danger: #dc3545;
 
 .backdrop {
     position: fixed;
@@ -92,6 +95,15 @@ $backdrop-background-color: #000000d0;
         }
     }
 
+    .backdrop-form-checkbox {
+        padding: 5px 0;
+        text-align: center;
+        font-size: 0.9rem;
+        input {
+            height: max-content;
+        }
+    }
+
     .backdrop-form-group-buttons {
         width: 100%;
         display: flex;
@@ -106,10 +118,14 @@ $backdrop-background-color: #000000d0;
     } 
     
     .backdrop-form--submit {
-        background-color: var(--success);
+        background-color: $success;
     }
 
     .backdrop-form--cancel {
-        background-color: var(--danger);
+        background-color: $danger;
+    }
+
+    .backdrop-form--watch {
+        background-color: $primary;
     }
 }

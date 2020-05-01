@@ -8,9 +8,35 @@ $(document).ready(function() {
     $(document).on('click', '.post-container', function() {
         $('.backdrop').css('visibility', 'visible');
         let post_id = $(this).attr('post_id');
-        $.get('/play/'+post_id, (response) => {
+        $.get('/visitor/'+post_id, response => {
             $('.backdrop').append(response);
         });
+    });
+    
+    $(document).on('submit', '#visitorForm', function(e) {
+        e.preventDefault();
+        
+        let postId = $('#postId').val();
+        let formData = {
+            company_agent: $('input[name=company_agent]').val(),
+            first_name: $('input[name=first_name]').val(),
+            last_name: $('input[name=last_name]').val(),
+            email: $('input[name=email]').val(),
+            mobile: $('input[name=mobile]').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        }
+
+        const url = '/visitor/' + postId;
+        $.ajax({
+            type:'POST',
+            url: url,
+            data: formData,
+            success: function(response) {
+                $('.backdrop').empty();
+                $('.backdrop').append(response);
+            }
+        });
+
     });
 
     $('#createPost, #createPostCollapsed, .add-post').click(function() {
@@ -39,6 +65,7 @@ $(document).ready(function() {
                 $('#subCategory').append(response); 
             },
             error: error => {
+                console.log(error);
             }
         });
     });
@@ -50,9 +77,7 @@ $(document).ready(function() {
 
     $(document).on('mouseenter', '.cat-name', function() {
         $('.subcat-container').empty();
-        // let categoryId = $(this).val();
         let categoryId = $(this).attr('value');
-        // console.log(categoryId);
         $.get('/sub_category/?filter=yes&category_id=' + categoryId, response => {
             $('.subcat-container').append(response);
             let height = $('.filter-dropdown-menu').innerHeight()
@@ -69,7 +94,6 @@ $(document).ready(function() {
     $(document).on('click', '.sort-dropdown-menu-btn', function() {
         let sortByValue = $(this).attr('value');
         $('#sortHiddenInput').attr('value', sortByValue);
-        console.log($('#sortHiddenInput').attr('value'));
         $('#toolbar-form').submit();
     });
 
