@@ -15,6 +15,7 @@ from .filters import PostFilter
 class Login(LoginView):
     pass
 
+
 def signup(request):
     if request.method == 'GET':
         form = UserForm()
@@ -22,9 +23,10 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "Registration successful. Please login to continue.")
+            messages.add_message(
+                request, messages.SUCCESS, "Registration successful. Please login to continue.")
             return redirect(reverse('login'))
-    return render(request, 'authentication/auth.html', { 'form': form })
+    return render(request, 'authentication/auth.html', {'form': form})
 
 
 class PostView(ListView):
@@ -38,41 +40,51 @@ class PostView(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['cat_all'] = Category.objects.all().order_by('name')
         context['filter'] = self.filterset_class
-        context['post_type'] = self.request.path.split('/')[2]
+        if self.kwargs.get('post_type', None) == None and self.request.path == reverse('dashboard'):
+            context['post_type'] = 'Dashboard'
+        else:
+            context['post_type'] = self.kwargs.get('post_type', None)
         return context
-    
+
     def get_queryset(self):
         post_types = ['webinar', 'video', 'upcoming']
         filter_data = {}
-        if self.request.user.is_authenticated and self.request.path == reverse('dashboard'):
+        if self.kwargs.get('post_type', None) != None and self.kwargs['post_type'] == 'all':
+            pass
+        elif self.request.user.is_authenticated and self.request.path == reverse('dashboard'):
             filter_data['user_id'] = self.request.user.id
             if self.request.GET.get('type', None) != None:
                 filter_data['type'] = self.request.GET.get('type')
         else:
-            filter_data['type'] = self.request.path.split('/')[2]
+            filter_data['type'] = self.kwargs['post_type']
             if filter_data['type'] not in post_types:
                 return Post.objects.none()
         return self.filterset_class(self.request.GET, queryset=Post.objects.filter(**filter_data).order_by('-created')).qs.distinct()
+
 
 def send_sub_categories_ajax(request):
     category_id = request.GET.get('category_id', None)
     for_filter = request.GET.get('filter', None)
 
     if category_id:
-        sub_categories = SubCategory.objects.filter(category_id=category_id).order_by('name')
+        sub_categories = SubCategory.objects.filter(
+            category_id=category_id).order_by('name')
     else:
         sub_categories = SubCategory.objects.all().order_by('name')
     if for_filter:
-        template = Template('{% for subcat in sub_categories %}<a class="subcat-name" value="{{ subcat.id }}">{{ subcat.name }}</a>{% endfor %}')
+        template = Template(
+            '{% for subcat in sub_categories %}<a class="subcat-name" value="{{ subcat.id }}">{{ subcat.name }}</a>{% endfor %}')
     else:
-        template = Template('<option value="" selected>---------</option>{% for sub_category in sub_categories %}<option value="{{ sub_category.id }}">{{ sub_category.name }}</option>{% endfor %}')
-    return HttpResponse(template.render(RequestContext(request, { 'sub_categories': sub_categories })))
+        template = Template(
+            '<option value="" selected>---------</option>{% for sub_category in sub_categories %}<option value="{{ sub_category.id }}">{{ sub_category.name }}</option>{% endfor %}')
+    return HttpResponse(template.render(RequestContext(request, {'sub_categories': sub_categories})))
+
 
 @login_required
 def add_post_ajax(request):
     if request.method == 'GET':
         categories = Category.objects.all().order_by('name')
-        return render(request, 'post/add_post.html', { 'categories': categories })
+        return render(request, 'post/add_post.html', {'categories': categories})
     elif request.method == 'POST':
         form_data = {
             'type': request.POST['type'],
@@ -84,10 +96,13 @@ def add_post_ajax(request):
             'tags': request.POST['tags'],
             'video': request.POST['video'],
         }
+        if form_data['date'] == '':
+            form_data.pop('date')
         Post.objects.create(user=request.user, **form_data)
         return redirect(reverse('dashboard'))
 
-def visitor_form_ajax(request, post_id):
+
+def visitor_form_ajax(request, post_id, is_visitor):
     if request.method == 'POST':
         formData = {
             'company_agent': get_user_model().objects.get(id=request.POST['company_agent']),
@@ -98,7 +113,12 @@ def visitor_form_ajax(request, post_id):
         }
         Visitor.objects.create(**formData)
         video = Post.objects.get(pk=post_id)
-        return render(request, 'post/video.html', { 'post': video })
-    return render(request, 'post/visitor_form.html', {
-        'post': Post.objects.get(id=post_id),
-    })
+        return render(request, 'post/video.html', {'post': video})
+    else:
+        if is_visitor == 'false':
+            video = Post.objects.get(pk=post_id)
+            return render(request, 'post/video.html', {'post': video})
+        elif is_visitor == 'true':
+            return render(request, 'post/visitor_form.html', {
+                'post': Post.objects.get(id=post_id),
+            })

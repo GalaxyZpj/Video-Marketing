@@ -335,6 +335,12 @@
   }
 }
 
+@media screen and (max-width: 850px) and (max-height: 425px) {
+  .post-grid {
+    height: calc(calc(calc(100vh - 55px - 50px - 32.95px) - 90px + 50px) + 50px);
+  }
+}
+
 @media screen and (max-width: 850px) {
   .post-grid {
     padding: 15px 24px 0 24px;

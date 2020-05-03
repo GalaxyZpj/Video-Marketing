@@ -4,10 +4,7 @@
   width: 100vw;
   z-index: 10000;
   background: #000000d0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  visibility: hidden;
+  display: none;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
