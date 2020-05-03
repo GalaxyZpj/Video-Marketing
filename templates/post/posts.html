@@ -65,7 +65,7 @@
         <div class="post-grid-container">
             <div class="post-grid" id="post-grid">
                 {% for post in posts %}
-                <div class="post-container" post_id="{{ post.id }}">
+                <div class="post-container" post_id="{{ post.id }}" visitor="{% if request.path == '/user/dashboard/' %}false{% else %}true{% endif %}">
                     <iframe src="{{ post.video }}" frameborder="0" allowfullscreen></iframe>
                     <p class="post-title">{{ post.title }}</p>
                     <p class="post-company">@{{ post.user.company_name }}{% if request.path == '/posts/upcoming/' %} | {{ post.date }}{% endif %}</p>

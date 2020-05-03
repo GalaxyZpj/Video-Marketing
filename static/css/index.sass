@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap')
+
+$navbar-height: 55px
+$search-input-bg-color: #f6f6fd
+$search-input-placeholder-color: #a058ff
+$tile-shadow-color: #0000003a
+$tile-shadow-color-hover: #8400ff
+$home-div-bg-color: #efeffc
+$tile-font-color: #6f00ff
+
+.home-div
+    padding-top: $navbar-height
+    min-height: 100vh
+    width: 100%
+    background: $home-div-bg-color
+
+.banner-content
+    background: url(/static/images/home/banner.jpg) no-repeat
+    height: 72vh
+
+.banner-form
+    height: 100%
+    width: 100%
+    padding: 7rem
+    @media screen and ( max-width: 1340px )
+        padding: 7rem 6rem
+    @media screen and ( max-width: 1300px )
+        padding: 7rem 4rem
+    @media screen and ( max-width: 1240px )
+        padding: 7rem 2.5rem
+    @media screen and ( max-width: 850px ) and ( max-height: 425px )
+        padding: 1.5rem
+    @media screen and ( max-width: 580px )
+        padding: 7rem 1.5rem
+    @media screen and ( max-width: 420px ) and ( max-height: 825px )
+        padding: 4rem 1.5rem
+
+    .banner-form--title
+        color: white
+        width: max-content
+        max-width: 100%
+        font-size: 3rem
+        @media screen and ( max-width: 810px )
+            font-size: 2.5rem
+        @media screen and ( max-width: 690px )
+            font-size: 2rem
+        @media screen and ( max-width: 545px )
+            font-size: 3rem
+        @media screen and ( max-width: 440px )
+            font-size: 2.5rem
+        @media screen and ( max-width: 375px )
+            font-size: 2rem
+
+    .big-first-alph
+        font-size: 3.5rem
+        font-size: inherit
+        color: #aaff3a
+    
+    .search-group
+        margin-top: 1rem
+        width: 720px
+        max-width: 100%
+        height: 2rem
+        border-radius: 16px
+        padding: 0 16px
+        background: $search-input-bg-color
+        display: flex
+        align-items: center
+
+        input
+            background: transparent
+            flex-grow: 1
+            border: 0
+            &:focus
+                outline: 0
+
+        button
+            background: transparent
+            border: 0
+            padding: 0
+        
+        @media screen and ( max-width: 810px )
+            width: 600px
+        @media screen and ( max-width: 690px )
+            width: 490px
+        @media screen and ( max-width: 545px )
+            width: 400px
+        @media screen and ( max-width: 440px )
+            width: 340px
+        @media screen and ( max-width: 375px )
+            width: 280px
+
+.tiles
+    width: 100%
+    height: calc(28vh - #{$navbar-height})
+    position: relative
+
+    @media screen and ( max-width: 1200px )
+        height: 650px
+    @media screen and ( max-width: 850px ) and ( max-height: 425px )
+        height: 750px
+
+.tiles-lifted
+    height: 150%
+    position: absolute
+    bottom: 10%
+    width: 100%
+    display: flex
+    justify-content: space-between
+    padding: 0 145px
+    @media screen and ( max-width: 1400px )
+        padding: 0 120px
+    @media screen and ( max-width: 1340px )
+        padding: 0 100px
+    @media screen and ( max-width: 1300px )
+        padding: 0 70px
+    @media screen and ( max-width: 1240px )
+        padding: 0 40px
+    @media screen and ( max-width: 1200px )
+        flex-direction: column
+        justify-content: flex-start
+        height: 100%
+        bottom: 30%
+
+        .tile-container
+            width: 100%
+            margin: 10px 0
+
+    @media screen and ( max-width: 810px )
+        padding: 0 15px
+    @media screen and ( max-width: 850px ) and ( max-height: 425px )
+        // height: 100%
+        bottom: 10%
+
+
+.tile
+    display: flex
+    padding: 40px 10px 20px 10px
+    flex-direction: column
+    align-items: center
+    justify-content: space-between
+    height: 100%
+    box-shadow: 0 0 10px $tile-shadow-color
+    background: white
+
+    @media screen and ( max-width: 1920px )
+        width: 480px
+    @media screen and ( max-width: 1760px )
+        width: 420px
+    @media screen and ( max-width: 1580px )
+        width: 360px
+    @media screen and ( max-width: 1200px )
+        width: 100%
+        height: 250px
+        padding: 20px 10px
+
+    img
+        height: 120px
+        width: 120px
+
+    p
+        color: $tile-font-color
+        border-top-left-radius: 18px
+        border-bottom-right-radius: 18px
+        border-right: 1px solid $tile-font-color
+        border-left: 1px solid $tile-font-color
+        padding: 0 12px
+        font-size: 1rem
+        font-family: 'Quicksand', sans-serif
+        font-weight: 500
+
+            
+    &:hover
+        box-shadow: 0 0 10px $tile-shadow-color-hover
+        transition: box-shadow 300ms ease-out
+        text-decoration: none
+
+        p
+            text-shadow: 0 0 2px $tile-shadow-color-hover
+            transition: text-shadow 400ms ease-out
+            
+    
+    &:not(:hover)
+        box-shadow: 0 0 10px $tile-shadow-color
+        transition: box-shadow 300ms ease-out
+
+        p
+            text-shadow: none
+            transition: text-shadow 400ms ease-out

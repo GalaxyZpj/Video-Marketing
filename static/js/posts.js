@@ -1,14 +1,15 @@
 $(document).ready(function() {
     
     $(document).on('click', '.backdrop-close', function() {
-        $('.backdrop').css('visibility', 'hidden');
+        $('.backdrop').css('display', 'none');
         $('.backdrop').empty();
     });
 
     $(document).on('click', '.post-container', function() {
-        $('.backdrop').css('visibility', 'visible');
+        $('.backdrop').css('display', 'flex');
         let post_id = $(this).attr('post_id');
-        $.get('/visitor/'+post_id, response => {
+        let is_visitor = $(this).attr('visitor')
+        $.get('/visitor/' + post_id + '/' + is_visitor, response => {
             $('.backdrop').append(response);
         });
     });
@@ -26,7 +27,7 @@ $(document).ready(function() {
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
         }
 
-        const url = '/visitor/' + postId;
+        const url = '/visitor/' + postId + '/' + 'true';
         $.ajax({
             type:'POST',
             url: url,
@@ -40,7 +41,7 @@ $(document).ready(function() {
     });
 
     $('#createPost, #createPostCollapsed, .add-post').click(function() {
-        $('.backdrop').css('visibility', 'visible');
+        $('.backdrop').css('display', 'flex');
         $.get('/add_post/', (response) => {
             $('.backdrop').append(response);
         });
@@ -49,9 +50,11 @@ $(document).ready(function() {
     $(document).on('change', '#type', function() {
         if ($(this).val() === 'upcoming') {
             $('#dateFormGroup').show();
+            $('#dateFormGroup input').prop('required', true);
         }
         else {
             $('#dateFormGroup').hide();
+            $('#dateFormGroup input').prop('required', false);
         }
     });
 

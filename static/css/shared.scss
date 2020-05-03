@@ -9,8 +9,7 @@ $danger: #dc3545;
     width: 100vw;
     z-index: 10000;
     background: $backdrop-background-color;
-    display: flex;
-    visibility: hidden;
+    display: none;
     justify-content: center;
     align-items: center;
 }

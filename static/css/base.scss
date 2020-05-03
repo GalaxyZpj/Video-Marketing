@@ -138,35 +138,37 @@ $tile-hover-color-2: #2b22ad;
 }
 
 html {
-    height: 100vh !important;
-    width: 100vw !important;
+    min-height: 100vh;
+    // height: 100vh !important;
+    // width: 100vw !important;
 }
 
 body {
-    height: 100vh !important;
-    width: 100vw !important;
-    margin: 0;
-    background-size: cover;
+    min-height: 100vh;
+    // height: 100vh !important;
+    // width: 100vw !important;
+    // margin: 0;
 }
 
+// .navbar-custom-bg-dark {
+//     @include navbar-theme (
+//         $nav-bg: linear-gradient(#000, #0000), 
+//         $nav-link-color: white, 
+//         $nav-link-color-hover: $accent-purple, 
+//         $nav-link-signup-font-color: white, 
+//         $nav-link-signup-bg-color: $accent-purple, 
+//         $nav-link-signup-bg-color-hover: black, 
+//         $nav-link-signup-font-color-hover: white,
+//         $collapse-li-bg-color: #00000052,
+//         $nav-dropdown-btn-font-color: white,
+//         $nav-dropdown-bg-color: #00000060,
+//         $nav-dropdown-menu-link-font-color: white,
+//         $nav-dropdown-menu-link-bg-color-hover: none
+//     );
+// }
+
+.navbar-galaxyzpj,
 .navbar-custom-bg-dark {
-    @include navbar-theme (
-        $nav-bg: linear-gradient(#000, #0000), 
-        $nav-link-color: white, 
-        $nav-link-color-hover: $accent-purple, 
-        $nav-link-signup-font-color: white, 
-        $nav-link-signup-bg-color: $accent-purple, 
-        $nav-link-signup-bg-color-hover: black, 
-        $nav-link-signup-font-color-hover: white,
-        $collapse-li-bg-color: #00000052,
-        $nav-dropdown-btn-font-color: white,
-        $nav-dropdown-bg-color: #00000060,
-        $nav-dropdown-menu-link-font-color: white,
-        $nav-dropdown-menu-link-bg-color-hover: none
-    );
-}
-
-.navbar-galaxyzpj {
     @include navbar-theme (
         $nav-bg: white, 
         $nav-link-color: black, 

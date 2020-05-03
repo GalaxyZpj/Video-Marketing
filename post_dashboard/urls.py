@@ -9,5 +9,5 @@ urlpatterns = [
     path('posts/<str:post_type>/', PostView.as_view(), name='posts'),
     path('add_post/', add_post_ajax, name='addPost'),
     path('sub_category/', send_sub_categories_ajax, name='sub-category'),
-    path('visitor/<slug:post_id>', visitor_form_ajax, name='visitor-form'),
+    path('visitor/<slug:post_id>/<slug:is_visitor>', visitor_form_ajax, name='visitor-form'),
 ]
